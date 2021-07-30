@@ -6,7 +6,15 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="">Home</a>
-      <a *ngIf="!isLogged" mat-list-item routerLink="login">Login</a>
+      <ng-container *ngIf="!authService.isUserLoggedIn(); else loggedIn">
+        <a mat-list-item routerLink="login">Login</a>
+      </ng-container>
+      <ng-template #loggedIn>
+        <a mat-list-item routerLink="">Kalendarz</a>
+        <a mat-list-item routerLink="">Usługi</a>
+        <a (click)="logout()" mat-list-item>Logout</a>
+      </ng-template>
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

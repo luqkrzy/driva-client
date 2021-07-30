@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SubSink } from 'subsink';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
+import { User } from '../../model/user';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -7,10 +12,11 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  private subscriptions = new SubSink();
+  private readonly pattern = '^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*';
   login: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
   }
 
   get username(): AbstractControl {
@@ -22,17 +28,30 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.login = this.fb.group({
-      username: ['', [Validators.required,
-                      Validators.minLength(3),
-                      Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*')]],
-      password: ['', Validators.required]
-
-    });
+    if (this.authService.isUserLoggedIn()) {
+      this.router.navigateByUrl('/');
+    }
+    this.initLoginForm();
   }
 
   onSubmit(login: FormGroup) {
-    console.log(login.value);
+    this.subscriptions.add(
+      this.authService.login(login.value).subscribe(response => {
+        this.authService.addTokenToCache(response.headers.get('Jwt-Token') as string);
+        this.authService.addUserToCache(response.body as User);
+        this.router.navigateByUrl('');
+      }, (error: HttpErrorResponse) => {
+        console.log(error);
+        this.password.setErrors({badCredentials: error.error.message});
+      }));
   }
 
+  private initLoginForm() {
+    this.login = this.fb.group({
+      username: ['', [Validators.required,
+                      Validators.minLength(3),
+                      Validators.pattern(this.pattern)]],
+      password: ['', Validators.required]
+    });
+  }
 }
