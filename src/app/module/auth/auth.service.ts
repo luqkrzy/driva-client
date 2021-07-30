@@ -9,7 +9,7 @@ import { User } from '../../model/user';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiUrl: string = environment.apiUrl;
+  public readonly apiUrl: string = environment.apiUrl;
   private readonly jwtHelper: JwtHelperService = new JwtHelperService();
 
   constructor(private http: HttpClient) {

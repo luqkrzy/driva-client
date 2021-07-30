@@ -13,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
   private subscriptions = new SubSink();
-  private readonly pattern = '^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*';
+  private readonly pattern = '^[A-Za-z0-9]*';
   login: FormGroup = new FormGroup({});
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
