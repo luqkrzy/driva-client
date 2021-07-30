@@ -8,7 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { AuthService } from './components/login/auth.service';
+import { AuthService } from './modules/auth/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
