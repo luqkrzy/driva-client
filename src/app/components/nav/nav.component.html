@@ -5,9 +5,9 @@
                [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="">Home</a>
+      <a [routerLinkActiveOptions]="{exact: true}" mat-list-item routerLink="" routerLinkActive="active">Home</a>
       <ng-container *ngIf="!authService.isUserLoggedIn(); else loggedIn">
-        <a mat-list-item routerLink="login">Login</a>
+        <a mat-list-item routerLink="login" routerLinkActive="active">Login</a>
       </ng-container>
       <ng-template #loggedIn>
         <a mat-list-item routerLink="">Kalendarz</a>
