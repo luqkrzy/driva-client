@@ -3,7 +3,7 @@ table {
 }
 
 .student-table {
-  padding: 3rem
+  padding: 3rem;
 }
 
 table {
@@ -20,6 +20,14 @@ td, th {
 }
 
 tr:hover {
-  background-color: rgba(0, 0, 0, .05);
+  color: #3F57B5;
+  background-color: #C2C7E6;
   cursor: pointer;
+}
+
+#students-header {
+  justify-content: space-between;
+  display: flex;
+  list-style-type: none;
+  margin-bottom: 1rem
 }

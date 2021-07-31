@@ -10,9 +10,9 @@
         <a mat-list-item routerLink="login" routerLinkActive="active">Login</a>
       </ng-container>
       <ng-template #loggedIn>
-        <a mat-list-item routerLink="calendar">Kalendarz</a>
-        <a mat-list-item routerLink="products">Produkty</a>
-        <a mat-list-item routerLink="students">Studenci</a>
+        <a mat-list-item routerLink="calendar" routerLinkActive="active">Kalendarz</a>
+        <a mat-list-item routerLink="products" routerLinkActive="active">Produkty</a>
+        <a mat-list-item routerLink="students" routerLinkActive="active">Studenci</a>
         <a (click)="logout()" mat-list-item>Logout</a>
       </ng-template>
 
