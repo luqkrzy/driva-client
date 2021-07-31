@@ -3,9 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { CalendarComponent } from './calendar.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { RoleGuard } from '../auth/role.guard';
-import { roles } from '../auth/roles';
+import { lvl3 } from '../auth/roles';
 
-const routes: Routes = [{path: '', component: CalendarComponent, canActivate: [AuthGuard, RoleGuard], data: {role: roles}}];
+const routes: Routes = [{path: '', component: CalendarComponent, canActivate: [AuthGuard, RoleGuard], data: {role: lvl3}}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

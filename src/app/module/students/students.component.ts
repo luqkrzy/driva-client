@@ -7,13 +7,6 @@ import { StudentService } from './student.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-}
-
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
