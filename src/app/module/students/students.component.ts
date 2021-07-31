@@ -15,14 +15,22 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class StudentsComponent implements OnInit, AfterViewInit {
   isLoadingResults = true;
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber'];
-  dataSource: MatTableDataSource<Student> = new MatTableDataSource<Student>();
+  dataSource: MatTableDataSource<Student>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort: MatSort = new MatSort();
 
   constructor(private studentService: StudentService, private router: Router) {
   }
 
   ngOnInit() {
+    // this.studentService.getAllStudents().subscribe(data => {
+    //   this.dataSource = new MatTableDataSource(data);
+    //   this.isLoadingResults = false;
+    //   this.dataSource.paginator = this.paginator;
+    //   this.dataSource.sort = this.sort;
+    // }, (error: HttpErrorResponse) => {
+    //   console.log(error);
+    // });
   }
 
   applyFilter(filterValue: any) {
@@ -36,9 +44,9 @@ export class StudentsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.studentService.getAllStudents().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
+      this.isLoadingResults = false;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.isLoadingResults = false;
     }, (error: HttpErrorResponse) => {
       console.log(error);
     });

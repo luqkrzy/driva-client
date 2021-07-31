@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Student } from './student';
 import { environment } from '../../../environments/environment';
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,8 @@ export class StudentService {
   }
 
   getAllStudents(): Observable<Student[]> {
-    return this.http.get<Student[]>(this.url);
+    return this.http.get<Student[]>(this.url).pipe(
+      shareReplay()
+    );
   }
 }

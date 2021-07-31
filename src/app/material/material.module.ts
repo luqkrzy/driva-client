@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -32,6 +33,7 @@ const MaterialComponents = [
   MatProgressSpinnerModule,
   MatInputModule,
   MatCardModule,
+  MatMenuModule,
 ];
 
 @NgModule({
