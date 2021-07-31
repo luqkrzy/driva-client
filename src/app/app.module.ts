@@ -10,12 +10,14 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthService } from './module/auth/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavComponent
+    NavComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

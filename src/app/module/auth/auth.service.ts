@@ -38,6 +38,7 @@ export class AuthService {
   logOut(): void {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    // this.router.navigate(['home']);
   }
 
   getTokeExpDate(): Date {
