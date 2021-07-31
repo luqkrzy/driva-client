@@ -9,8 +9,9 @@ import { NavComponent } from './components/nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthService } from './module/auth/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AuthInterceptor } from './module/auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     FlexLayoutModule,
     HttpClientModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, {
+    provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+  }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

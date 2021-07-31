@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   addTokenToCache(token: string): void {
-    localStorage.setItem('token', JSON.stringify(token));
+    localStorage.setItem('token', JSON.stringify(token).slice(1, -1));
   }
 
   getTokenFromCache(): string {
