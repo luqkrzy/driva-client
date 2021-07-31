@@ -5,6 +5,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { FlexModule } from '@angular/flex-layout';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -13,7 +21,17 @@ const MaterialComponents = [
   MatSidenavModule,
   MatIconModule,
   MatListModule,
-
+  MatPaginatorModule,
+  MatTableModule,
+  FlexModule,
+  MatSortModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatIconModule,
+  MatButtonModule,
+  MatProgressSpinnerModule,
+  MatInputModule,
+  MatCardModule,
 ];
 
 @NgModule({

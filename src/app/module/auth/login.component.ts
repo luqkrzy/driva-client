@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../model/user';
 import { HttpErrorResponse } from '@angular/common/http';
+import { shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -43,7 +44,8 @@ export class LoginComponent implements OnInit {
       }, (error: HttpErrorResponse) => {
         console.log(error);
         this.password.setErrors({badCredentials: error.error.message});
-      }));
+      },));
+    shareReplay();
   }
 
   private initLoginForm() {

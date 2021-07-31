@@ -38,23 +38,28 @@ export class AuthService {
   logOut(): void {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    // this.router.navigate(['home']);
   }
 
   getTokeExpDate(): Date {
     return this.jwtHelper.getTokenExpirationDate(this.getTokenFromCache()) as Date;
   }
 
+
   isUserLoggedIn(): boolean {
     let token = this.getTokenFromCache();
     if (token && this.getUserFromCache() &&
       !this.jwtHelper.isTokenExpired(token) &&
-      this.jwtHelper.decodeToken(this.getTokenFromCache()).sub) {
+      this.jwtHelper.decodeToken(token).sub) {
       return true;
     } else {
       this.logOut();
       return false;
     }
+  }
+
+  getRole(): string[] {
+    let user = this.getUserFromCache();
+    return user.roles!;
   }
 }
 
