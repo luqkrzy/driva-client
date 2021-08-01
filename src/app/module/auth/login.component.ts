@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { User } from '../../model/user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { shareReplay } from 'rxjs/operators';
+import { Constant } from '../../shared/constant';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import { shareReplay } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
   private subscriptions = new SubSink();
-  private readonly pattern = '^[A-Za-z0-9]*';
+  private readonly pattern = Constant.USERNAME_REGEX;
   login: FormGroup = new FormGroup({});
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
@@ -43,7 +44,9 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('');
       }, (error: HttpErrorResponse) => {
         console.log(error);
-        this.password.setErrors({badCredentials: error.error.message});
+        if (error.status === 401) {
+          this.password.setErrors({badCredentials: error.error.message});
+        }
       },));
     shareReplay();
   }

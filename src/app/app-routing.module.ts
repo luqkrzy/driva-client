@@ -4,7 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, data: {breadcrumb: {alias: 'Home'}}},
   {path: 'home', redirectTo: ''},
   {path: 'login', loadChildren: () => import('./module/auth/login.module').then(m => m.LoginModule)},
   {path: 'calendar', loadChildren: () => import('./module/calendar/calendar.module').then(m => m.CalendarModule)},

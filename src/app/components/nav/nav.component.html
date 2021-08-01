@@ -1,31 +1,10 @@
-<mat-toolbar color="primary" fxLayoutAlign="space-between center">
-  <button (click)="drawer.toggle()" *ngIf="isHandset$ | async" aria-label="Toggle sidenav" mat-icon-button
-          type="button">
-    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-  </button>
-  <span>DrivaApp</span>
-  <ng-container *ngIf="authService.isUserLoggedIn()">
-    <button [matMenuTriggerFor]="menu" aria-label="menu" mat-icon-button>
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>person_outline</mat-icon>
-        <span routerLink="account">Konto</span>
-      </button>
-      <button (click)="logout()" mat-menu-item>
-        <mat-icon>logout</mat-icon>
-        <span>Logout</span>
-      </button>
-    </mat-menu>
-  </ng-container>
-</mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  <mat-sidenav #drawer [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
-               [opened]="(isHandset$ | async) === false">
-    <!--    <mat-toolbar>Menu</mat-toolbar>-->
+               [opened]="(isHandset$ | async) === false"
+               class="sidenav"
+               fixedInViewport>
+    <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a [routerLinkActiveOptions]="{exact: true}" mat-list-item routerLink="" routerLinkActive="active">Home</a>
       <ng-container *ngIf="!authService.isUserLoggedIn(); else loggedIn">
@@ -39,6 +18,34 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
+    <mat-toolbar color="primary" fxLayoutAlign="space-between center">
+      <button (click)="drawer.toggle()" *ngIf="isHandset$ | async" aria-label="Toggle sidenav" mat-icon-button
+              type="button">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>DrivApp</span>
+      <ng-container *ngIf="authService.isUserLoggedIn()">
+        <button [matMenuTriggerFor]="menu" aria-label="menu" mat-icon-button>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>person_outline</mat-icon>
+            <span routerLink="account">Konto</span>
+          </button>
+          <button (click)="logout()" mat-menu-item>
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </ng-container>
+    </mat-toolbar>
+    <div class="mt-2">
+      <xng-breadcrumb [separator]="iconTemplate"></xng-breadcrumb>
+      <ng-template #iconTemplate>
+        <mat-icon>chevron_right</mat-icon>
+      </ng-template>
+    </div>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

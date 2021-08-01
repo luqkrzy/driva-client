@@ -3,18 +3,20 @@ import { CommonModule } from '@angular/common';
 import { AccountRoutingModule } from './account-routing.module';
 import { AccountComponent } from './account.component';
 import { MaterialModule } from '../../shared/material/material.module';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { UpdateAccountComponent } from './update-account/update-account.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AccountComponent
+    AccountComponent,
+    UpdateAccountComponent
   ],
   imports: [
     CommonModule,
     AccountRoutingModule,
     MaterialModule,
-    MatGridListModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
 export class AccountModule {
 }

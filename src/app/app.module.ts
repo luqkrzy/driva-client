@@ -12,6 +12,7 @@ import { AuthService } from './module/auth/auth.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthInterceptor } from './module/auth/auth.interceptor';
+import { BreadcrumbModule, BreadcrumbService } from 'xng-breadcrumb';
 
 @NgModule({
   declarations: [
@@ -28,11 +29,13 @@ import { AuthInterceptor } from './module/auth/auth.interceptor';
     LayoutModule,
     FlexLayoutModule,
     HttpClientModule,
+    BreadcrumbModule,
   ],
-  providers: [AuthService, {
-    provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
-  }],
+  providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+              BreadcrumbService,
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {
+}

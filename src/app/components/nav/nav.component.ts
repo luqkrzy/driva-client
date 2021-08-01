@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { lvl1, lvl2, lvl3 } from '../../module/auth/roles';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavComponent {
+export class NavComponent implements OnInit {
   lvl3: string[] = lvl3;
   lvl2: string[] = lvl2;
   lvl1: string[] = lvl1;
@@ -28,5 +28,8 @@ export class NavComponent {
   hasAuthority(roles: string[]): boolean {
     const role = this.authService.getRole();
     return roles.some(r => role.indexOf(r) >= 0);
+  }
+
+  ngOnInit(): void {
   }
 }

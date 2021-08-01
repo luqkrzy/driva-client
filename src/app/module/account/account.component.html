@@ -1,21 +1,25 @@
-<div style="background-color: #3F57B5; color: white;">
-  <div fxLayout="row" fxLayoutAlign="space-between center" style="padding: 1rem; margin-bottom: 2rem">
-    <span>
+<div class="container flex justify-center">
+  <mat-card class="w-9/12">
+    <mat-card-title>
       <mat-icon>person</mat-icon>
-      <span class="mat-display-1"> {{account.firstName}} {{account.lastName}} </span>
-    </span>
-    <div>
-      <mat-icon>edit</mat-icon>
-    </div>
-  </div>
-  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+      <span> {{account.firstName}} {{account.lastName}} </span>
+    </mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>id: {{account.id}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>lagin: {{account.username}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>email: {{account.email}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>tel: {{account.phoneNumber}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>rola: {{account.roles}}</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button (click)="openDialog()" color="primary" mat-raised-button>edytuj</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
-<div class="pl-5">
-  <div class="mat-subheading-2 mat-body-2">id: {{account.id}}</div>
-  <div class="mat-subheading-2 mat-body-2">nick: {{account.username}}</div>
-  <div class="mat-subheading-2 mat-body-2">Email: {{account.email}}</div>
-  <div class="mat-subheading-2 mat-body-2">Telefon: {{account.phoneNumber}}</div>
-  <div class="mat-subheading-2 mat-body-2">Role: {{account.roles}}</div>
-</div>
-
 
