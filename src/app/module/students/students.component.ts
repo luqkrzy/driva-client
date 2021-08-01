@@ -16,7 +16,6 @@ export class StudentsComponent implements OnInit, AfterViewInit {
   isLoadingResults = true;
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber'];
   dataSource: MatTableDataSource<Student>;
-
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort = new MatSort();
   @ViewChild(MatTable) table: MatTable<any>;
@@ -26,6 +25,15 @@ export class StudentsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<Student>();
+    // this.studentService.students$.subscribe(
+    //   (data: Student[]) => {
+    //     this.dataSource.data = data;
+    //     this.dataSource.paginator = this.paginator;
+    //     this.dataSource.sort = this.sort;
+    //     this.isLoadingResults = false;
+    //   }, (error: HttpErrorResponse) => {
+    //     console.log(error);
+    //   });
   }
 
   applyFilter(filterValue: any) {
@@ -37,6 +45,15 @@ export class StudentsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    // this.studentService.students$.subscribe(
+    //   (data: Student[]) => {
+    //     this.dataSource.data = data;
+    //     this.dataSource.paginator = this.paginator;
+    //     this.dataSource.sort = this.sort;
+    //     this.isLoadingResults = false;
+    //   }, (error: HttpErrorResponse) => {
+    //     console.log(error);
+    //   });
     this.studentService.getAllStudents().subscribe((data: Student[]) => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
