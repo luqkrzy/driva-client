@@ -23,19 +23,21 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>DrivApp</span>
-      <button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" mat-icon-button>
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>person_outline</mat-icon>
-          <span>Konto</span>
+      <ng-container *ngIf="authService.isUserLoggedIn()">
+        <button [matMenuTriggerFor]="menu" aria-label="menu" mat-icon-button>
+          <mat-icon>more_vert</mat-icon>
         </button>
-        <button (click)="logout()" mat-menu-item>
-          <mat-icon>logout</mat-icon>
-          <span>Logout</span>
-        </button>
-      </mat-menu>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>person_outline</mat-icon>
+            <span routerLink="account">Konto</span>
+          </button>
+          <button (click)="logout()" mat-menu-item>
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </ng-container>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

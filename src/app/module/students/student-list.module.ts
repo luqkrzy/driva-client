@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StudentsRoutingModule } from './students-routing.module';
 import { StudentsComponent } from './students.component';
-import { MaterialModule } from '../../material/material.module';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MaterialModule } from '../../shared/material/material.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +12,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     CommonModule,
     StudentsRoutingModule,
     MaterialModule,
-    MatProgressBarModule
   ]
 })
 export class StudentListModule {
