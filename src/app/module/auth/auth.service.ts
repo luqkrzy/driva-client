@@ -5,6 +5,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../../model/user';
 import { shareReplay } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   public readonly apiUrl: string = environment.apiUrl;
   private readonly jwtHelper: JwtHelperService = new JwtHelperService();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   login(user: User): Observable<HttpResponse<User>> {
@@ -39,6 +40,7 @@ export class AuthService {
   logOut(): void {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    this.router.navigateByUrl("");
   }
 
   getTokeExpDate(): Date {
@@ -48,14 +50,9 @@ export class AuthService {
 
   isUserLoggedIn(): boolean {
     const token = this.getTokenFromCache();
-    if (token && this.getUserFromCache() &&
+    return !!(token && this.getUserFromCache() &&
       !this.jwtHelper.isTokenExpired(token) &&
-      this.jwtHelper.decodeToken(token).sub) {
-      return true;
-    } else {
-      this.logOut();
-      return false;
-    }
+      this.jwtHelper.decodeToken(token).sub);
   }
 
   getRole(): string[] {
