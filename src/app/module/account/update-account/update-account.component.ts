@@ -18,12 +18,8 @@ export class UpdateAccountComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<UpdateAccountComponent>,
-    @Inject(MAT_DIALOG_DATA) data: IUser) {
+    @Inject(MAT_DIALOG_DATA) data: IUser,) {
     this.user = data;
-  }
-
-  get username(): AbstractControl {
-    return this.updateAccount.get('username') as AbstractControl;
   }
 
   get firstName(): AbstractControl {
