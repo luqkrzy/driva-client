@@ -9,8 +9,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-students',
-  templateUrl: './students.component.html',
-  styleUrls: ['./students.component.scss']
+  templateUrl: './students-list.component.html',
+  styleUrls: ['./students-list.component.scss']
 })
 export class StudentsListComponent implements OnInit, AfterViewInit {
   isLoadingResults = true;
