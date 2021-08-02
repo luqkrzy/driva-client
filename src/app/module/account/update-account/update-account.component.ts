@@ -11,7 +11,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class UpdateAccountComponent implements OnInit {
   updateAccount: FormGroup = new FormGroup({});
-  private userNameRegex: string = Constant.USERNAME_REGEX;
   private nameRegex: string = Constant.NAME_REGEX;
   private phoneRegex: string = Constant.PHONE_REGEX;
   private emailRegex: string = Constant.EMAIL_REGEX;
@@ -47,13 +46,11 @@ export class UpdateAccountComponent implements OnInit {
     this.initForm();
   }
 
-  onSubmit(data: FormGroup) {
-    this.dialogRef.close(data.value);
-  }
-
   onSave() {
-    const dialogResult = this.updateAccount.value;
-    this.dialogRef.close(dialogResult);
+    const updatedAccount: IUser = this.updateAccount.value;
+    updatedAccount.id = this.user.id;
+    updatedAccount.roles = this.user.roles;
+    this.dialogRef.close(updatedAccount);
   }
 
   onClose() {
@@ -62,7 +59,6 @@ export class UpdateAccountComponent implements OnInit {
 
   private initForm() {
     this.updateAccount = this.fb.group({
-      username: [this.user.username, [Validators.minLength(5), Validators.pattern(this.userNameRegex)]],
       firstName: [this.user.firstName, [Validators.minLength(4), Validators.pattern(this.nameRegex)]],
       lastName: [this.user.lastName, [Validators.minLength(3), Validators.pattern(this.nameRegex)]],
       email: [this.user.email, Validators.pattern(this.emailRegex)],

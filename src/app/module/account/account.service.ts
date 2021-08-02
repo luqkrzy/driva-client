@@ -9,14 +9,16 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class AccountService {
-  url: string = environment.accountUrl;
+  private accountUrl: string = environment.accountUrl;
 
   constructor(private http: HttpClient) {
   }
 
   getPrincipalAccount(): Observable<IUser> {
-    return this.http.get<IUser>(this.url).pipe(
-      shareReplay()
-    );
+    return this.http.get<IUser>(this.accountUrl).pipe(shareReplay());
+  }
+
+  updateAccount(updatedAccount: IUser): Observable<IUser> {
+    return this.http.patch(this.accountUrl, updatedAccount).pipe(shareReplay());
   }
 }

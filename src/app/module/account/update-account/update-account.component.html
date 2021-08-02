@@ -2,20 +2,10 @@
 <form [formGroup]="updateAccount">
   <mat-dialog-content>
     <mat-form-field class="w-full">
-      <mat-label>Nick</mat-label>
-      <input formControlName="username" matInput>
-      <mat-error *ngIf="username?.hasError('minlength')">
-        nick musi zawierać minimum {{username.errors?.minlength.requiredLength}} liter
-      </mat-error>
-      <mat-error *ngIf="username?.hasError('pattern')">
-        nick może zwierać tylko litery i liczby
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="w-full">
       <mat-label>Imię</mat-label>
       <input formControlName="firstName" matInput>
       <mat-error *ngIf="firstName?.hasError('minlength')">
-        imię musi zawierać minimum {{username.errors?.minlength.requiredLength}} litery
+        imię musi zawierać minimum {{firstName.errors?.minlength.requiredLength}} litery
       </mat-error>
       <mat-error *ngIf="firstName?.hasError('pattern')">
         imię może zwierać tylko litery
@@ -25,7 +15,7 @@
       <mat-label>Nazwisko</mat-label>
       <input formControlName="lastName" matInput>
       <mat-error *ngIf="lastName?.hasError('minlength')">
-        nazwisko musi zawierać minimum {{username.errors?.minlength.requiredLength}} litery
+        nazwisko musi zawierać minimum {{lastName.errors?.minlength.requiredLength}} litery
       </mat-error>
       <mat-error *ngIf="lastName?.hasError('pattern')">
         nazwisko może zwierać tylko litery
