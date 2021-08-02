@@ -8,7 +8,7 @@ import { shareReplay } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class StudentService implements OnInit {
+export class StudentListService implements OnInit {
   private readonly url = environment.studentsUrl;
   private studentsBs = new BehaviorSubject<Student[]>([]);
   students$ = this.studentsBs.asObservable();

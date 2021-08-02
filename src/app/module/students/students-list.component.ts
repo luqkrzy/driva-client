@@ -3,7 +3,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Student } from './student';
-import { StudentService } from './student.service';
+import { StudentListService } from './student-list.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.scss']
 })
-export class StudentsComponent implements OnInit, AfterViewInit {
+export class StudentsListComponent implements OnInit, AfterViewInit {
   isLoadingResults = true;
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber'];
   dataSource: MatTableDataSource<Student>;
@@ -20,7 +20,7 @@ export class StudentsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort = new MatSort();
   @ViewChild(MatTable) table: MatTable<any>;
 
-  constructor(private studentService: StudentService, private router: Router) {
+  constructor(private studentService: StudentListService, private router: Router) {
   }
 
   ngOnInit() {

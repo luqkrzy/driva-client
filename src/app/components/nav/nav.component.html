@@ -29,9 +29,9 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
+          <button mat-menu-item routerLink="account">
             <mat-icon>person_outline</mat-icon>
-            <span routerLink="account">Konto</span>
+            <span>Konto</span>
           </button>
           <button (click)="logout()" mat-menu-item>
             <mat-icon>logout</mat-icon>
