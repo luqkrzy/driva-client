@@ -1,5 +1,5 @@
 <h2 mat-dialog-title></h2>
-<form [formGroup]="updateAccount">
+<form [formGroup]="newStudentForm">
   <mat-dialog-content>
     <mat-form-field class="w-full">
       <mat-label>Imię</mat-label>
@@ -38,8 +38,8 @@
   </mat-dialog-content>
   <mat-dialog-actions class="float-right">
     <button (click)="onClose()" mat-button>Anuluj</button>
-    <button (click)="onSave()" [disabled]="updateAccount.invalid" color="primary" mat-raised-button type="submit">
-      Zapisz
+    <button (click)="onSave()" [disabled]="newStudentForm.invalid" color="primary" mat-raised-button type="submit">
+      Dodaj
     </button>
   </mat-dialog-actions>
 </form>

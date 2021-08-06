@@ -15,10 +15,10 @@ export class AccountService {
   }
 
   getPrincipalAccount(): Observable<IUser> {
-    return this.http.get<IUser>(this.accountUrl).pipe(shareReplay());
+    return this.http.get<IUser>(this.accountUrl).pipe(shareReplay(1));
   }
 
   updateAccount(updatedAccount: IUser): Observable<IUser> {
-    return this.http.patch(this.accountUrl, updatedAccount).pipe(shareReplay());
+    return this.http.patch(this.accountUrl, updatedAccount);
   }
 }

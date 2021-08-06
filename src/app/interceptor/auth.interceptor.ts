@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthService } from '../module/auth/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -18,7 +18,6 @@ export class AuthInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${this.authService.getTokenFromCache()}`
       })
     });
-    console.log(newReq);
     return next.handle(newReq);
   }
 }

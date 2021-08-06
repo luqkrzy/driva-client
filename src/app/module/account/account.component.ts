@@ -29,7 +29,7 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  openDialogAccount() {
+  openDialogAccount(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '600px';
     dialogConfig.data = this.account;
@@ -41,7 +41,7 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  private updateAccount(updatedAccount: IUser) {
+  private updateAccount(updatedAccount: IUser): void {
     const matSnackBarConfig = new MatSnackBarConfig();
     matSnackBarConfig.duration = 5000;
     this.accountService.updateAccount(updatedAccount).subscribe(result => {

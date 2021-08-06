@@ -9,9 +9,8 @@ import { NavComponent } from './components/nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthService } from './module/auth/auth.service';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { AuthInterceptor } from './module/auth/auth.interceptor';
 import { BreadcrumbModule, BreadcrumbService } from 'xng-breadcrumb';
 import { DashComponent } from './module/test/dash/dash.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -19,6 +18,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { AddStudentComponent } from './module/students/add-student/add-student.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { interceptorProviders } from './interceptor/interceptors';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { MatButtonModule } from '@angular/material/button';
     HomeComponent,
     NavComponent,
     PageNotFoundComponent,
-    DashComponent
+    DashComponent,
+    AddStudentComponent
   ],
   imports: [
     BrowserModule,
@@ -42,9 +45,11 @@ import { MatButtonModule } from '@angular/material/button';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
+    ReactiveFormsModule,
   ],
-  providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+  providers: [AuthService,
               BreadcrumbService,
+              interceptorProviders,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
