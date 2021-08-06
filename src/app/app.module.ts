@@ -13,13 +13,20 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthInterceptor } from './module/auth/auth.interceptor';
 import { BreadcrumbModule, BreadcrumbService } from 'xng-breadcrumb';
+import { DashComponent } from './module/test/dash/dash.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DashComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +37,11 @@ import { BreadcrumbModule, BreadcrumbService } from 'xng-breadcrumb';
     FlexLayoutModule,
     HttpClientModule,
     BreadcrumbModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
               BreadcrumbService,
