@@ -9,9 +9,10 @@ const routes: Routes = [
   {path: 'login', loadChildren: () => import('./module/auth/login.module').then(m => m.LoginModule)},
   {path: 'calendar', loadChildren: () => import('./module/calendar/calendar.module').then(m => m.CalendarModule)},
   {path: 'products', loadChildren: () => import('./module/products/products.module').then(m => m.ProductsModule)},
+  {path: 'oferta', loadChildren: () => import('./module/product-type/product-type.module').then(m => m.ProductTypeModule)},
   {path: 'students', loadChildren: () => import('./module/students/student-list.module').then(m => m.StudentListModule)},
   {path: 'account', loadChildren: () => import('./module/account/account.module').then(m => m.AccountModule)},
-  {path: 'test', loadChildren: () => import('./module/test/test.module').then(m => m.TestModule)},
+//  {path: 'test', loadChildren: () => import('./module/test/test.module').then(m => m.TestModule)},
   {path: '**', component: PageNotFoundComponent}
 ];
 
