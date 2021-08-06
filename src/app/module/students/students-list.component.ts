@@ -9,6 +9,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { StudentService } from './student.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-students',
@@ -48,11 +49,15 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.studentListService.getAllStudents().subscribe((data: IStudent[]) => {
-      this.dataSource.data = data;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.isLoadingResults = false;
-    });
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.isLoadingResults = false;
+      },
+      (error: HttpErrorResponse) => {
+        this.isLoadingResults = false;
+      }
+    );
   }
 
   onClick(row: HTMLElement): void {
@@ -75,6 +80,9 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
         this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
         console.log(result);
       },
+      (error: HttpErrorResponse) => {
+        this.isLoadingResults = false;
+      }
     );
   }
 }

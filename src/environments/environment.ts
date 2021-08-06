@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/api',
-  studentsUrl: 'http://localhost:8080/api/students',
+  studentsUrl: 'http://localhost:8080/api/students1',
   accountUrl: 'http://localhost:8080/api/account',
   userUrl: 'http://localhost:8080/api/account'
 };
