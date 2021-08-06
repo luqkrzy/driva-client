@@ -1,18 +1,6 @@
-table {
-  width: 100%;
-}
 
-.student-table {
-  padding: 3rem;
-}
-
-table {
-  width: 100%;
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
+th {
+  font-weight: bold;
 }
 
 td, th {
@@ -23,4 +11,14 @@ tr:hover {
   color: #3F57B5;
   background-color: #C2C7E6;
   cursor: pointer;
+}
+
+.mat-column-id {
+  width: 32px;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-firstName {
+  padding-left: 16px;
 }

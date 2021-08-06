@@ -15,9 +15,28 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.matSnackBar.open('We have error', 'OK', this.matSnackBarConfig);
+        const errorMessage = this.setError(error);
+        this.matSnackBar.open(errorMessage, 'OK', this.matSnackBarConfig);
+        console.log(error.error);
         return throwError(error.error);
       })
     );
+  }
+
+  setError(error: HttpErrorResponse): string {
+    if (error.error instanceof ErrorEvent) {
+      //  client side error
+      return error.error.message;
+    } else {
+      //  server side error
+      const status = error.status;
+      if (status == 404) {
+        return 'Nie znaleziono zasobu';
+      }
+      if (status == 409) {
+        return `Konflikt ${error.error.message}`;
+      }
+    }
+    return 'Wystąpił błąd';
   }
 }

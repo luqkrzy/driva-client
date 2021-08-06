@@ -1,19 +1,19 @@
-<div class="student-table">
+<div class="p-12">
   <div class="mat-typography" fxLayoutAlign="space-between center">
     <h1>Studenci</h1>
     <button (click)="openAddStudentDialog()" color="primary" mat-raised-button>
-      <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+      <mat-icon aria-hidden="false" aria-label="icon">add</mat-icon>
       Dodaj
     </button>
   </div>
-    <mat-form-field>
-      <input (keyup)="applyFilter($event)" matInput placeholder="szukaj">
-    </mat-form-field>
+  <mat-form-field class="w-full">
+    <input (keyup)="applyFilter($event)" matInput placeholder="szukaj">
+  </mat-form-field>
     <div class="mat-elevation-z8">
       <table [dataSource]="dataSource" mat-table matSort>
 
         <ng-container matColumnDef="id">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>ID</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>Id</th>
           <td *matCellDef="let row" mat-cell> {{row.id}} </td>
         </ng-container>
         <ng-container matColumnDef="firstName">
