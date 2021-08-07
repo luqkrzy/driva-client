@@ -5,11 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { IStudent } from '../../../model/student';
 import { IProduct } from '../../../model/product';
 import { IProductType } from '../../../model/product-type';
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
+import { ProductTypeService } from '../../product-type/product-type.service';
 
 @Component({
   selector: 'app-add-student',
@@ -21,14 +17,11 @@ export class AddStudentComponent implements OnInit {
   newProductForm: FormGroup = new FormGroup({});
   switchEnabled = false;
   productTypes: IProductType[] = [
-    {name: 'Szkola', basePrice: 500, description: 'some desc', id: 1, productCategory: 'B'},
-    {name: 'Szkola', basePrice: 500, description: 'some desc', id: 2, productCategory: 'B'},
-    {name: 'Szkola', basePrice: 500, description: 'some desc', id: 1, productCategory: 'B'},
-    {name: 'Szkola', basePrice: 500, description: 'some desc', id: 2, productCategory: 'B'}
   ];
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddStudentComponent>,
+    private productTypeService: ProductTypeService,
   ) {
   }
 
@@ -84,6 +77,10 @@ export class AddStudentComponent implements OnInit {
     this.switchEnabled = !this.switchEnabled;
     if (this.switchEnabled) {
       this.newProductForm.enable();
+      this.productTypeService.getAllProductTypes().subscribe(data => {
+          this.productTypes = data;
+        }
+      );
     } else {
       this.newProductForm.disable();
     }

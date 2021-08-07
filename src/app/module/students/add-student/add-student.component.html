@@ -43,9 +43,10 @@
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Kategoria</mat-label>
       <mat-select formControlName="productTypeId" required>
-        <mat-option *ngFor="let productType of productTypes" [value]="productType.id">
-          <span class="font-bold">Kat. {{productType.productCategory}}</span>
-          - {{productType.name}}, {{productType.description}}, cena baz: {{productType.basePrice}}
+        <mat-option *ngFor="let pt of productTypes" [value]="pt.id">
+          <span class="font-bold">Kat. {{pt.productCategory}}</span>
+          - {{pt.name}}, {{pt.description | slice:0:30}},
+          cena bazowa: <span class="font-bold">{{pt.basePrice}} zł</span>
         </mat-option>
       </mat-select>
     </mat-form-field>
