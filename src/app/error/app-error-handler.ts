@@ -14,6 +14,9 @@ export class AppErrorHandler {
       if (status === 0) {
         return 'Brak połączenia z bazą';
       }
+      if (status == 400) {
+        return 'Nieprawidłowo sformatowane dane';
+      }
       if (status == 404) {
         return 'Nie znaleziono zasobu';
       }
