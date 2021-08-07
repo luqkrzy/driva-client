@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Constant } from '../../../shared/constant';
 import { MatDialogRef } from '@angular/material/dialog';
-import { IStudent, Student } from '../IStudent';
+import { IStudent, Student } from '../../../model/student';
 
 @Component({
   selector: 'app-add-student',
@@ -11,10 +11,13 @@ import { IStudent, Student } from '../IStudent';
 })
 export class AddStudentComponent implements OnInit, AfterViewInit {
   newStudentForm: FormGroup = new FormGroup({});
+  newProductForm: FormGroup = new FormGroup({});
   private nameRegex: string = Constant.NAME_REGEX;
   private phoneRegex: string = Constant.PHONE_REGEX;
   private emailRegex: string = Constant.EMAIL_REGEX;
   private student: IStudent = new Student();
+  enableSelect = new FormControl(false);
+  productTypes: any[] = ['Programmer', 'Businness Analyst', 'Designer', 'DBA'];
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddStudentComponent>,
@@ -71,16 +74,9 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
       phoneNumber: [
         this.student.phoneNumber,
         [Validators.pattern(this.phoneRegex), Validators.required]]
-    }, {validators: myFormValidator});
+    },);
+    this.newProductForm = this.fb.group({
+      position: ['', Validators.required]
+    });
   }
 }
-
-const myFormValidator = (control: FormGroup): ValidationErrors | null => {
-  const lastName = control.get('lastName')!.value;
-  const firstName = control.get('firstName')!.value;
-  if (lastName && !firstName || firstName && !lastName) {
-    return {'emptyField': true};
-  } else {
-    return null;
-  }
-};

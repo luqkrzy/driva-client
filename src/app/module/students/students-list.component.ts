@@ -2,7 +2,6 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { IStudent } from './IStudent';
 import { StudentListService } from './student-list.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -10,6 +9,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { StudentService } from './student.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { IStudent } from '../../model/student';
 
 @Component({
   selector: 'app-students',

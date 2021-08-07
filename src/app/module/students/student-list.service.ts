@@ -1,9 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { IStudent } from './IStudent';
 import { environment } from '../../../environments/environment';
 import { shareReplay } from 'rxjs/operators';
+import { IStudent } from '../../model/student';
 
 @Injectable({
   providedIn: 'root'

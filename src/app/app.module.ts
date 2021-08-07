@@ -14,10 +14,6 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { BreadcrumbModule, BreadcrumbService } from 'xng-breadcrumb';
 import { DashComponent } from './module/test/dash/dash.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { AddStudentComponent } from './module/students/add-student/add-student.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { interceptorProviders } from './interceptor/interceptors';
@@ -41,12 +37,8 @@ import { AppErrorHandler } from './error/app-error-handler';
     FlexLayoutModule,
     HttpClientModule,
     BreadcrumbModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
     ReactiveFormsModule,
+    MatGridListModule,
   ],
   providers: [AuthService,
               BreadcrumbService,

@@ -18,6 +18,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -43,6 +45,12 @@ const MaterialComponents = [
   MatGridListModule,
   MatSnackBarModule,
   MatDialogModule,
+  MatCardModule,
+  MatMenuModule,
+  MatIconModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatSelectModule,
 ];
 
 @NgModule({

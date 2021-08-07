@@ -1,4 +1,4 @@
-import { Product } from '../products/Product';
+import { IProduct } from './product';
 
 export interface IStudent {
   id?: number;
@@ -9,17 +9,21 @@ export interface IStudent {
   createdBy?: number;
   createdDate?: Date;
   userId?: number;
-  products?: Product[];
+  products?: IProduct[];
 }
 
 export class Student implements IStudent {
   id?: number;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  phoneNumber?: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
   createdBy?: number;
   createdDate?: Date;
   userId?: number;
-  products?: Product[];
+  products?: IProduct[];
+
+  addProduct(product: IProduct): void {
+    this.products?.push(product);
+  }
 }

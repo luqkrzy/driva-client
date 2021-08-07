@@ -35,10 +35,22 @@
         niepoprawny telefon, podaj same cyfry
       </mat-error>
     </mat-form-field>
+    <p>
+      <mat-checkbox [formControl]="enableSelect">Dodaj produkt</mat-checkbox>
+    </p>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose an option</mat-label>
+      <mat-select [disabled]="!enableSelect.value">
+        <mat-option *ngFor="let pos of productTypes" [value]="pos">{{pos}}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </mat-dialog-content>
+
+
   <mat-dialog-actions class="float-right">
     <button (click)="onClose()" mat-button>Anuluj</button>
-    <button (click)="onSave()" [disabled]="newStudentForm.invalid" color="primary" mat-raised-button type="submit">
+    <button (click)="onSave()" [disabled]="newStudentForm.invalid ||
+    newStudentForm.valid && enableSelect.value && newProductForm.valid" color="primary" mat-raised-button type="submit">
       Dodaj
     </button>
   </mat-dialog-actions>
