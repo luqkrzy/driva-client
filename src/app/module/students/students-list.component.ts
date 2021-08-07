@@ -19,7 +19,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class StudentsListComponent implements OnInit, AfterViewInit {
   isLoadingResults = true;
   readonly displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber'];
-  dataSource: MatTableDataSource<IStudent>;
+  dataSource = new MatTableDataSource<IStudent>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
@@ -34,7 +34,6 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<IStudent>();
     this.dialogConfig.width = '600px';
     this.matSnackBarConfig.duration = 5000;
   }
@@ -79,6 +78,7 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
     this.studentService.createStudent(student).subscribe(result => {
         this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
         console.log(result);
+        this.table.renderRows();
       },
       (error: HttpErrorResponse) => {
         this.isLoadingResults = false;

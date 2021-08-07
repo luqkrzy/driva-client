@@ -30,6 +30,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     } else {
       //  server side error
       const status = error.status;
+      if (status === 0) {
+        return 'Brak połączenia z bazą';
+      }
       if (status == 404) {
         return 'Nie znaleziono zasobu';
       }
