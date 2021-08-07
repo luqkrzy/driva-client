@@ -21,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AddStudentComponent } from './module/students/add-student/add-student.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { interceptorProviders } from './interceptor/interceptors';
+import { AppErrorHandler } from './error/app-error-handler';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { interceptorProviders } from './interceptor/interceptors';
   providers: [AuthService,
               BreadcrumbService,
               interceptorProviders,
+              AppErrorHandler,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
