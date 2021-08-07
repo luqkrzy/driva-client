@@ -1,9 +1,9 @@
 <h2 mat-dialog-title></h2>
-<form [formGroup]="newStudentForm">
-  <mat-dialog-content>
+<mat-dialog-content>
+  <form [formGroup]="newStudentForm">
     <mat-form-field class="w-full">
       <mat-label>Imię</mat-label>
-      <input [value]="firstName.value | titlecase" formControlName="firstName" matInput>
+      <input [value]="firstName.value | titlecase" formControlName="firstName" matInput required>
       <mat-error *ngIf="firstName?.hasError('minlength')">
         imię musi zawierać minimum {{firstName.errors?.minlength.requiredLength}} litery
       </mat-error>
@@ -13,7 +13,7 @@
     </mat-form-field>
     <mat-form-field class="w-full">
       <mat-label>Nazwisko</mat-label>
-      <input [value]="lastName.value | titlecase" formControlName="lastName" matInput>
+      <input [value]="lastName.value | titlecase" formControlName="lastName" matInput required>
       <mat-error *ngIf="lastName?.hasError('minlength')">
         nazwisko musi zawierać minimum {{lastName.errors?.minlength.requiredLength}} litery
       </mat-error>
@@ -23,36 +23,64 @@
     </mat-form-field>
     <mat-form-field class="w-full">
       <mat-label>Email</mat-label>
-      <input formControlName="email" matInput type="email">
+      <input formControlName="email" matInput required type="email">
       <mat-error *ngIf="email?.hasError('pattern')">
         niepoprawny adres email
       </mat-error>
     </mat-form-field>
     <mat-form-field class="w-full">
       <mat-label>Tel</mat-label>
-      <input formControlName="phoneNumber" matInput>
+      <input formControlName="phoneNumber" matInput required>
       <mat-error *ngIf="phoneNumber?.hasError('pattern')">
         niepoprawny telefon, podaj same cyfry
       </mat-error>
     </mat-form-field>
-    <p>
-      <mat-checkbox [formControl]="enableSelect">Dodaj produkt</mat-checkbox>
-    </p>
-    <mat-form-field appearance="fill">
-      <mat-label>Choose an option</mat-label>
-      <mat-select [disabled]="!enableSelect.value">
-        <mat-option *ngFor="let pos of productTypes" [value]="pos">{{pos}}</mat-option>
+  </form>
+  <p>
+    <mat-slide-toggle (click)="switch()" color="primary">Dodaj produkt</mat-slide-toggle>
+  </p>
+  <form [formGroup]="newProductForm">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Kategoria</mat-label>
+      <mat-select formControlName="productTypeId" required>
+        <mat-option *ngFor="let productType of productTypes" [value]="productType.id">
+          <span class="font-bold">Kat. {{productType.productCategory}}</span>
+          - {{productType.name}}, {{productType.description}}, cena baz: {{productType.basePrice}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
-  </mat-dialog-content>
-
-
-  <mat-dialog-actions class="float-right">
-    <button (click)="onClose()" mat-button>Anuluj</button>
-    <button (click)="onSave()" [disabled]="newStudentForm.invalid ||
-    newStudentForm.valid && enableSelect.value && newProductForm.valid" color="primary" mat-raised-button type="submit">
-      Dodaj
-    </button>
-  </mat-dialog-actions>
-</form>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Liczba godzin</mat-label>
+      <input formControlName="hoursLeft" matInput type="number">
+      <mat-error *ngIf="hoursLeft?.hasError('pattern')">
+        niepoprawny format - akceptowalne tylko pełne liczby
+      </mat-error>
+      <mat-error *ngIf="hoursLeft?.hasError('max')">
+        liczba godzin jest jest za wysoka
+      </mat-error>
+    </mat-form-field>
+    <section class="flex space-x-4">
+      <p>
+        <mat-checkbox color="primary" formControlName="bookOnline">Rezerwacja online</mat-checkbox>
+      </p>
+      <p>
+        <mat-checkbox color="primary" formControlName="isPaid">Zapłacone</mat-checkbox>
+      </p>
+    </section>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Cena</mat-label>
+      <input formControlName="price" matInput type="number">
+      <span matSuffix>PLN</span>
+      <mat-error *ngIf="price?.hasError('max')">
+        cena jest jest za wysoka
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="float-right">
+  <button (click)="onClose()" mat-button>Anuluj</button>
+  <button (click)="onSave()" [disabled]="validateForm()" color="primary" mat-raised-button type="submit">
+    Dodaj
+  </button>
+</mat-dialog-actions>
 

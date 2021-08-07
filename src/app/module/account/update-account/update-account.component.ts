@@ -10,9 +10,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./update-account.component.scss']
 })
 export class UpdateAccountComponent implements OnInit {
-  private nameRegex: string = Constant.NAME_REGEX;
-  private phoneRegex: string = Constant.PHONE_REGEX;
-  private emailRegex: string = Constant.EMAIL_REGEX;
   updateAccount: FormGroup = new FormGroup({});
   private user: IUser;
 
@@ -57,13 +54,13 @@ export class UpdateAccountComponent implements OnInit {
     this.updateAccount = this.fb.group({
       firstName: [this.user.firstName, [Validators.minLength(4),
                                         Validators.required,
-                                        Validators.pattern(this.nameRegex)]],
+                                        Validators.pattern(Constant.NAME_REGEX)]],
       lastName: [this.user.lastName, [Validators.minLength(3),
                                       Validators.required,
-                                      Validators.pattern(this.nameRegex)]],
-      email: [this.user.email, [Validators.pattern(this.emailRegex),
+                                      Validators.pattern(Constant.NAME_REGEX)]],
+      email: [this.user.email, [Validators.pattern(Constant.EMAIL_REGEX),
                                 Validators.required]],
-      phoneNumber: [this.user.phoneNumber, [Validators.pattern(this.phoneRegex),
+      phoneNumber: [this.user.phoneNumber, [Validators.pattern(Constant.PHONE_REGEX),
                                             Validators.required]]
     });
   }

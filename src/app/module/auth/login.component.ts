@@ -15,7 +15,6 @@ import { Constant } from '../../shared/constant';
 })
 export class LoginComponent implements OnInit {
   private subscriptions = new SubSink();
-  private readonly pattern = Constant.USERNAME_REGEX;
   login: FormGroup = new FormGroup({});
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
@@ -55,7 +54,7 @@ export class LoginComponent implements OnInit {
     this.login = this.fb.group({
       username: ['', [Validators.required,
                       Validators.minLength(3),
-                      Validators.pattern(this.pattern)]],
+                      Validators.pattern(Constant.USERNAME_REGEX)]],
       password: ['', Validators.required]
     });
   }

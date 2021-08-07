@@ -74,7 +74,6 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
   }
 
   private saveStudent(student: IStudent): void {
-    console.log(student);
     this.studentService.createStudent(student).subscribe(result => {
         this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
         console.log(result);

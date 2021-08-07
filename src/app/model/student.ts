@@ -23,7 +23,4 @@ export class Student implements IStudent {
   userId?: number;
   products?: IProduct[];
 
-  addProduct(product: IProduct): void {
-    this.products?.push(product);
-  }
 }
