@@ -45,20 +45,10 @@
       <mat-select formControlName="productTypeId" required>
         <mat-option *ngFor="let pt of productTypes" [value]="pt.id">
           <span class="font-bold">Kat. {{pt.productCategory}}</span>
-          - {{pt.name}}, {{pt.description | slice:0:30}},
-          cena bazowa: <span class="font-bold">{{pt.basePrice}} zł</span>
+          - {{pt.name}}, godzin {{pt.lessonsHours}}, {{pt.description | slice:0:30}},
+          cena bazowa: <span class="font-bold">{{pt.basePrice}}zł</span>
         </mat-option>
       </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="fill" class="w-full">
-      <mat-label>Liczba godzin</mat-label>
-      <input formControlName="hoursLeft" matInput type="number">
-      <mat-error *ngIf="hoursLeft?.hasError('pattern')">
-        niepoprawny format - akceptowalne tylko pełne liczby
-      </mat-error>
-      <mat-error *ngIf="hoursLeft?.hasError('max')">
-        liczba godzin jest jest za wysoka
-      </mat-error>
     </mat-form-field>
     <section class="flex space-x-4">
       <p>
