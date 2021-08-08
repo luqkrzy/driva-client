@@ -59,9 +59,9 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
     );
   }
 
-  onClick(row: HTMLElement): void {
-    console.log(row);
-    this.router.navigateByUrl('home');
+  onClick(row: IStudent): void {
+    console.log(row.id);
+    this.router.navigateByUrl('students/' + row.id);
   }
 
   openAddStudentDialog(): void {
@@ -74,10 +74,9 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
   }
 
   private saveStudent(student: IStudent): void {
-    this.studentService.createStudent(student).subscribe(result => {
+    this.studentService.createStudent(student).subscribe((result: IStudent) => {
         this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
-        console.log(result);
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('students/' + result.id);
       },
       (error: HttpErrorResponse) => {
         this.isLoadingResults = false;
