@@ -1,6 +1,6 @@
 <div class="m-5">
-  <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
+  <h1 class="mat-h1">Dashboard {{colsNo | async }}</h1>
+  <mat-grid-list [cols]="colsNo | async" rowHeight="350px">
     <mat-grid-tile colspan="1" rowspan="2">
       <mat-card class="dashboard-card">
         <mat-card-header>
