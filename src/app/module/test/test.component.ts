@@ -12,6 +12,8 @@ export class TestComponent implements OnInit, AfterViewInit {
   user: string = '';
   edit: any;
   editUser: string = '';
+  data = 'laszlo';
+  username: string = '';
 
   constructor(private behaviorService: BehaviorService) {
   }
@@ -37,5 +39,9 @@ export class TestComponent implements OnInit, AfterViewInit {
 
   editTheUser() {
     this.behaviorService.editUser(this.editUser);
+  }
+
+  log() {
+    console.log(this.username);
   }
 }

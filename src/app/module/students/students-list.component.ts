@@ -34,7 +34,7 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.dialogConfig.width = '600px';
+    this.dialogConfig.width = '800px';
     this.matSnackBarConfig.duration = 5000;
   }
 
@@ -77,7 +77,7 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
     this.studentService.createStudent(student).subscribe(result => {
         this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
         console.log(result);
-        this.table.renderRows();
+        this.router.navigateByUrl('');
       },
       (error: HttpErrorResponse) => {
         this.isLoadingResults = false;

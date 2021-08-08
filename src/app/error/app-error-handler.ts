@@ -17,6 +17,9 @@ export class AppErrorHandler {
       if (status == 400) {
         return 'Nieprawidłowo sformatowane dane';
       }
+      if (status == 401) {
+        return 'Niepoprawne dane';
+      }
       if (status == 404) {
         return 'Nie znaleziono zasobu';
       }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Constant } from '../../../shared/constant';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -12,17 +12,23 @@ import { ProductTypeService } from '../../product-type/product-type.service';
   templateUrl: './add-student.component.html',
   styleUrls: ['./add-student.component.scss']
 })
-export class AddStudentComponent implements OnInit {
+export class AddStudentComponent implements OnInit, AfterViewInit {
   newStudentForm: FormGroup = new FormGroup({});
   newProductForm: FormGroup = new FormGroup({});
   switchEnabled = false;
-  productTypes: IProductType[] = [
-  ];
+  productTypes: IProductType[] = [];
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddStudentComponent>,
     private productTypeService: ProductTypeService,
   ) {
+  }
+
+  ngAfterViewInit(): void {
+    this.productTypeService.getAllProductTypes().subscribe(data => {
+        this.productTypes = data;
+      }
+    );
   }
 
   get firstName(): AbstractControl {
@@ -77,10 +83,6 @@ export class AddStudentComponent implements OnInit {
     this.switchEnabled = !this.switchEnabled;
     if (this.switchEnabled) {
       this.newProductForm.enable();
-      this.productTypeService.getAllProductTypes().subscribe(data => {
-          this.productTypes = data;
-        }
-      );
     } else {
       this.newProductForm.disable();
     }
@@ -89,7 +91,7 @@ export class AddStudentComponent implements OnInit {
   private initStudentForm(): void {
     this.newStudentForm = this.fb.group({
       firstName: [
-        'Luq',
+        'Luk',
         [Validators.minLength(3),
          Validators.required,
          Validators.pattern(Constant.NAME_REGEX)]],
@@ -117,7 +119,7 @@ export class AddStudentComponent implements OnInit {
         Validators.pattern(Constant.NUMBER_ONLY_REGEX),]],
       bookOnline: [{value: false, disabled: true}],
       isPaid: [{value: false, disabled: true}],
-      price: [{value: 999.99, disabled: true}, [Validators.min(1), Validators.max(20000)]],
+      price: [{value: 0, disabled: true}, [Validators.min(0), Validators.max(20000)]],
     });
   }
 }

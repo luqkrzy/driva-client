@@ -18,7 +18,8 @@ export class AuthService {
   }
 
   login(user: User): Observable<HttpResponse<User>> {
-    return this.http.post<User>(`${this.apiUrl}/auth/login`, user, {observe: 'response'}).pipe(shareReplay());
+    return this.http.post<User>(`${this.apiUrl}/auth/login`, user,
+      {observe: 'response'}).pipe(shareReplay());
   }
 
   addUserToCache(user: User): void {

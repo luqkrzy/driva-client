@@ -15,7 +15,7 @@ import { BreadcrumbModule, BreadcrumbService } from 'xng-breadcrumb';
 import { DashComponent } from './module/test/dash/dash.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { AddStudentComponent } from './module/students/add-student/add-student.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { interceptorProviders } from './interceptor/interceptors';
 import { AppErrorHandler } from './error/app-error-handler';
 
@@ -39,6 +39,7 @@ import { AppErrorHandler } from './error/app-error-handler';
     BreadcrumbModule,
     ReactiveFormsModule,
     MatGridListModule,
+    FormsModule,
   ],
   providers: [AuthService,
               BreadcrumbService,
