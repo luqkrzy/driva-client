@@ -60,7 +60,6 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
   }
 
   onClick(row: IStudent): void {
-    console.log(row.id);
     this.router.navigateByUrl('students/' + row.id);
   }
 

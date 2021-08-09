@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class AccountService {
-  private accountUrl: string = environment.accountUrl;
+  private readonly accountUrl: string = environment.accountUrl;
 
   constructor(private http: HttpClient) {
   }
