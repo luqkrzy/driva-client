@@ -46,9 +46,8 @@
           </tbody>
         </table>
       </mat-card-content>
-
     </mat-card>
-    <mat-card class="mat-elevation-z8  ">
+    <mat-card class="mat-elevation-z8 ">
       <mat-card-header>
         <mat-card-title>
           Inne
@@ -62,48 +61,97 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content class="">
-        <div>
-          contene here
-        </div>
+        some content
       </mat-card-content>
     </mat-card>
-    <div class="mat-elevation-z8 col-span-full ">
-
-      <table [dataSource]="dataSource"
-             class="mat-elevation-z8" mat-table
-             multiTemplateDataRows>
-        <ng-container *ngFor="let column of columnsToDisplay" matColumnDef="{{column}}">
-          <th *matHeaderCellDef mat-header-cell> {{column}} </th>
-          <td *matCellDef="let element" mat-cell> {{element[column]}} </td>
-        </ng-container>
-        <ng-container matColumnDef="expandedDetail">
-          <td *matCellDef="let element" [attr.colspan]="columnsToDisplay.length" mat-cell>
-            <div [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
-                 class="element-detail">
-              <div class="element-diagram">
-                <div class="element-position"> {{element.position}} </div>
-                <div class="element-symbol"> {{element.symbol}} </div>
-                <div class="element-name"> {{element.name}} </div>
-                <div class="element-weight"> {{element.weight}} </div>
-              </div>
-              <div class="element-description">
-                {{element.description}}
-                <span class="element-description-attribution"> -- Wikipedia </span>
+    <mat-card class="mat-elevation-z8 col-span-full ">
+      <mat-card-header>
+        <mat-card-title>
+          Produkty
+        </mat-card-title>
+      </mat-card-header>
+      <mat-tab-group #tabGroup mat-stretch-tabs>
+        <mat-tab *ngFor="let pr of products">
+          <ng-template mat-tab-label>{{pr.productType.productCategory}} {{pr.productType.name}}&nbsp;
+            <button [matMenuTriggerFor]="menu" aria-label="Toggle menu" class="more-button" mat-icon-button>
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item>Edytuj</button>
+              <button mat-menu-item>Usuń</button>
+            </mat-menu>
+          </ng-template>
+          <div class="flex flex-wrap gap-2">
+            <div class="flex-none">
+              <div class="my-4">
+                <table>
+                  <tbody>
+                  <tr class="border">
+                    <td>id</td>
+                    <td>{{pr.id}}</td>
+                  </tr>
+                  <tr>
+                    <td>Nazwa</td>
+                    <td>{{pr.productType.name}}</td>
+                  </tr>
+                  <tr>
+                    <td>Kategoria</td>
+                    <td>{{pr.productType.productCategory}}</td>
+                  </tr>
+                  <tr>
+                    <td>Liczba godzin</td>
+                    <td>{{pr.hoursLeft}}</td>
+                  </tr>
+                  <tr>
+                    <td>Online</td>
+                    <td>{{pr.bookOnline}}</td>
+                  </tr>
+                  <tr>
+                    <td>Zapłacono</td>
+                    <td>{{pr.bookOnline}}</td>
+                  </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-          </td>
-        </ng-container>
+            <div class="flex-auto my-4">
+              <table [dataSource]="pr.lessons" class="lessons" mat-table>
+                <ng-container matColumnDef="id">
+                  <th *matHeaderCellDef mat-header-cell> Id.</th>
+                  <td *matCellDef="let element" mat-cell> {{element.lessonId}} </td>
+                </ng-container>
+                <ng-container matColumnDef="data">
+                  <th *matHeaderCellDef mat-header-cell> Data</th>
+                  <td *matCellDef="let element" mat-cell> {{element.date}} </td>
+                </ng-container>
+                <ng-container matColumnDef="start">
+                  <th *matHeaderCellDef mat-header-cell> Start</th>
+                  <td *matCellDef="let element" mat-cell> {{element.timeStart}} </td>
+                </ng-container>
+                <ng-container matColumnDef="koniec">
+                  <th *matHeaderCellDef mat-header-cell> Koniec</th>
+                  <td *matCellDef="let element" mat-cell> {{element.timeEnd}} </td>
+                </ng-container>
+                <ng-container matColumnDef="instruktor">
+                  <th *matHeaderCellDef mat-header-cell> Instruktor</th>
+                  <td *matCellDef="let element" mat-cell> {{element.instructorFullName}} </td>
+                </ng-container>
+                <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+              </table>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">control_point</mat-icon>
+          </ng-template>
+          add new product
+        </mat-tab>
+      </mat-tab-group>
 
-        <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
-        <tr (click)="expandedElement = expandedElement === element ? null : element"
-            *matRowDef="let element; columns: columnsToDisplay;"
-            [class.expanded-row]="expandedElement === element"
-            class="element-row"
-            mat-row>
-        </tr>
-        <tr *matRowDef="let row; columns: ['expandedDetail']" class="detail-row" mat-row></tr>
-      </table>
-    </div>
+
+    </mat-card>
 
 
   </div>

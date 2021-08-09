@@ -22,6 +22,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -60,6 +61,7 @@ const MaterialComponents = [
   MatIconModule,
   MatButtonModule,
   MatTooltipModule,
+  MatTabsModule,
 ];
 
 @NgModule({

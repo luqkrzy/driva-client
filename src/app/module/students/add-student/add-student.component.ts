@@ -67,8 +67,10 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
   onSave(): void {
     const newStudent: IStudent = this.newStudentForm.value;
     const newProduct: IProduct = this.newProductForm.value;
-    newStudent.products = [newProduct];
-    console.log(newProduct);
+    if (newProduct.productTypeId != null) {
+      newStudent.products = [newProduct];
+      console.log(newProduct);
+    }
     this.dialogRef.close(newStudent);
   }
 
@@ -111,7 +113,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
 
   private initProductForm(): void {
     this.newProductForm = this.fb.group({
-      productTypeId: [{value: '', disabled: true}, Validators.required],
+      productTypeId: [{value: null, disabled: true}, Validators.required],
       hoursLeft: [{value: 50, disabled: true}, [
         Validators.required,
         Validators.min(1),
