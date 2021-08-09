@@ -18,6 +18,7 @@ import { AddStudentComponent } from './module/students/add-student/add-student.c
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { interceptorProviders } from './interceptor/interceptors';
 import { AppErrorHandler } from './error/app-error-handler';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AppErrorHandler } from './error/app-error-handler';
     ReactiveFormsModule,
     MatGridListModule,
     FormsModule,
+    MatDatepickerModule,
   ],
   providers: [AuthService,
               BreadcrumbService,

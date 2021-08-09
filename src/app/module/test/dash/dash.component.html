@@ -1,118 +1,39 @@
-<div class="flex items-center justify-center">
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 w-full m-5 h-28 ">
-
-    <mat-card class="mat-elevation-z8">
-      <mat-card-header>
-        <mat-card-title>
-          <button [matMenuTriggerFor]="menu" aria-label="Toggle menu" class="more-button" mat-icon-button>
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu" xPosition="before">
-            <button mat-menu-item>Edytuj</button>
-            <button mat-menu-item>Usuń</button>
-          </mat-menu>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="text-center">
-          <mat-icon class="text-6xl" color="primary">account_circle</mat-icon>
+<article>
+  <h2>Editable Dynamic Table</h2>
+  <table [dataSource]="dataSource" mat-table>
+    <ng-container *ngFor="let col of displayedColumns; index as i" [matColumnDef]="col">
+      <th *matHeaderCellDef mat-header-cell>
+        <span *ngIf="col !== 'edit'">
+          {{col}}
+        </span>
+      </th>
+      <td *matCellDef="let element" mat-cell>
+        <div *ngIf="!element.isEdit">
+          <div *ngIf="col === 'edit';" class="btn-edit">
+            <button (click)="element.isEdit = !element.isEdit">Edit</button>
+          </div>
+          <span #spanHeader>
+            {{element[col]}}
+          </span>
         </div>
-        <p class="text-2xl pb-4 text-center pt-4">student.firstName}} student.lastName}}</p>
-        <table>
-          <tbody class="text-md">
-          <tr>
-            <td>
-              <mat-icon matTooltip="telefon">call</mat-icon>
-            </td>
-            <td>tudent.phoneNumber}}</td>
-          </tr>
-          <mat-divider></mat-divider>
-          <tr>
-            <td>
-              <mat-icon matTooltip="email">email</mat-icon>
-            </td>
-            <td>tudent.email}}</td>
-          </tr>
-          <mat-divider></mat-divider>
-          <tr>
-            <td>
-              <mat-icon matTooltip="data utworzenia">date_range</mat-icon>
-            </td>
-            <td>tudent.createdDate | date}}</td>
-          </tr>
-          <mat-divider></mat-divider>
-          <tr>
-            <td>
-              <mat-icon matTooltip="utworzono przez">person_add_alt</mat-icon>
-            </td>
-            <td>tudent.createdBy}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </mat-card-content>
-
-    </mat-card>
-    <mat-card class="mat-elevation-z8  ">
-      <mat-card-header>
-        <mat-card-title>
-          Inne
-          <button [matMenuTriggerFor]="menu" aria-label="Toggle menu" class="more-button" mat-icon-button>
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu" xPosition="before">
-            <button mat-menu-item>Expand</button>
-            <button mat-menu-item>Remove</button>
-          </mat-menu>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content class="">
-        <div>
-          contene here
+        <div *ngIf="element.isEdit" [ngSwitch]="dataSchema[i]">
+          <div *ngSwitchCase="'edit'" class="btn-edit">
+            <button (click)="element.isEdit = !element.isEdit">Done</button>
+          </div>
+          <mat-form-field *ngSwitchCase="'date'" appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input [(ngModel)]="element[col]" [matDatepicker]="picker" matInput>
+            <mat-datepicker-toggle></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field *ngSwitchDefault>
+            <mat-label>{{col}}</mat-label>
+            <input [(ngModel)]="element[col]" [type]="dataSchema[i]" matInput>
+          </mat-form-field>
         </div>
-      </mat-card-content>
-    </mat-card>
-
-    <div class="mat-elevation-z8  col-span-full ">
-
-      <table [dataSource]="dataSource"
-             class="mat-elevation-z8" mat-table
-             multiTemplateDataRows>
-        <ng-container *ngFor="let column of columnsToDisplay" matColumnDef="{{column}}">
-          <th *matHeaderCellDef mat-header-cell> {{column}} </th>
-          <td *matCellDef="let element" mat-cell> {{element[column]}} </td>
-        </ng-container>
-        <ng-container matColumnDef="expandedDetail">
-          <td *matCellDef="let element" [attr.colspan]="columnsToDisplay.length" mat-cell>
-            <div [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
-                 class="example-element-detail">
-              <div class="example-element-diagram">
-                <div class="example-element-position"> {{element.position}} </div>
-                <div class="example-element-symbol"> {{element.symbol}} </div>
-                <div class="example-element-name"> {{element.name}} </div>
-                <div class="example-element-weight"> {{element.weight}} </div>
-              </div>
-              <div class="example-element-description">
-                {{element.description}}
-                <span class="example-element-description-attribution"> -- Wikipedia </span>
-              </div>
-            </div>
-          </td>
-        </ng-container>
-
-        <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
-        <tr (click)="expandedElement = expandedElement === element ? null : element"
-            *matRowDef="let element; columns: columnsToDisplay;"
-            [class.example-expanded-row]="expandedElement === element"
-            class="example-element-row"
-            mat-row>
-        </tr>
-        <tr *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row" mat-row></tr>
-      </table>
-    </div>
-
-
-  </div>
-
-
-</div>
-
+      </td>
+    </ng-container>
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+</article>
