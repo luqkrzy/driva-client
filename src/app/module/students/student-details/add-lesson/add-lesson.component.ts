@@ -25,7 +25,11 @@ export class AddLessonComponent implements OnInit {
 
   onSave() {
     console.log(this.newLesson.value);
-    console.log(this.newLesson.value.date._d.toISOString());
+    // console.log(this.newLesson.value.date.toDateString());
+    console.log(this.newLesson.value.date.toISOString());
+    console.log(this.newLesson.value.date.toLocaleDateString());
+    // console.log(this.newLesson.value.date.toLocaleString());
+    // console.log(this.newLesson.value.date.toLocaleTimeString());
   }
 
   validateForm(): boolean {

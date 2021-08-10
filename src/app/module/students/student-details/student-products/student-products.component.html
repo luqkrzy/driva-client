@@ -4,82 +4,84 @@
   </mat-card-title>
 </mat-card-header>
 <mat-tab-group #tabGroup>
-  <mat-tab *ngFor="let pr of products">
-    <ng-template mat-tab-label>{{pr.productType.productCategory}} {{pr.productType.name}}&nbsp;
-      <button [matMenuTriggerFor]="menu" aria-label="Toggle menu" class="more-button" mat-icon-button>
-        <mat-icon class=text-md>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu" xPosition="before">
-        <button mat-menu-item>Edytuj</button>
-        <button mat-menu-item>Usuń</button>
-      </mat-menu>
-    </ng-template>
-    <div class="flex flex-wrap gap-2">
-      <div class="flex-1">
-        <div class="my-4">
-          <table>
-            <tbody>
-            <tr>
-              <td>id</td>
-              <td>{{pr.id}}</td>
-            </tr>
-            <tr>
-              <td>Nazwa</td>
-              <td>{{pr.productType.name}}</td>
-            </tr>
-            <tr>
-              <td>Kategoria</td>
-              <td>{{pr.productType.productCategory}}</td>
-            </tr>
-            <tr>
-              <td>Liczba godzin</td>
-              <td>{{pr.hoursLeft}}</td>
-            </tr>
-            <tr>
-              <td>Online</td>
-              <td>{{pr.bookOnline}}</td>
-            </tr>
-            <tr>
-              <td>Zapłacono</td>
-              <td>{{pr.bookOnline}}</td>
-            </tr>
-            <tr>
-              <td>Opis</td>
-              <td>{{pr.productType.description}}</td>
-            </tr>
-            </tbody>
+  <ng-container *ngFor="let pr of products">
+    <mat-tab>
+      <ng-template mat-tab-label>{{pr.productType.productCategory}} {{pr.productType.name}}&nbsp;
+        <button [matMenuTriggerFor]="menu" aria-label="Toggle menu" class="more-button" mat-icon-button>
+          <mat-icon class=text-md>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item>Edytuj</button>
+          <button mat-menu-item>Usuń</button>
+        </mat-menu>
+      </ng-template>
+      <div class="flex flex-wrap gap-2">
+        <div class="flex-1">
+          <div class="my-4">
+            <table>
+              <tbody>
+              <tr>
+                <td>id</td>
+                <td>{{pr.id}}</td>
+              </tr>
+              <tr>
+                <td>Nazwa</td>
+                <td>{{pr.productType.name}}</td>
+              </tr>
+              <tr>
+                <td>Kategoria</td>
+                <td>{{pr.productType.productCategory}}</td>
+              </tr>
+              <tr>
+                <td>Liczba godzin</td>
+                <td>{{pr.hoursLeft}}</td>
+              </tr>
+              <tr>
+                <td>Online</td>
+                <td>{{pr.bookOnline}}</td>
+              </tr>
+              <tr>
+                <td>Zapłacono</td>
+                <td>{{pr.bookOnline}}</td>
+              </tr>
+              <tr>
+                <td>Opis</td>
+                <td>{{pr.productType.description}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="flex-auto my-4">
+          <table [dataSource]="pr.lessons" class="lessons" mat-table>
+            <ng-container matColumnDef="id">
+              <th *matHeaderCellDef mat-header-cell> Id.</th>
+              <td *matCellDef="let element" mat-cell> {{element.lessonId}} </td>
+            </ng-container>
+            <ng-container matColumnDef="data">
+              <th *matHeaderCellDef mat-header-cell> Data</th>
+              <td *matCellDef="let element" mat-cell> {{element.date}} </td>
+            </ng-container>
+            <ng-container matColumnDef="start">
+              <th *matHeaderCellDef mat-header-cell> Start</th>
+              <td *matCellDef="let element" mat-cell> {{element.timeStart}} </td>
+            </ng-container>
+            <ng-container matColumnDef="koniec">
+              <th *matHeaderCellDef mat-header-cell> Liczba godzin</th>
+              <td *matCellDef="let element" mat-cell> {{element.hoursCount}} </td>
+            </ng-container>
+            <ng-container matColumnDef="instruktor">
+              <th *matHeaderCellDef mat-header-cell> Instruktor</th>
+              <td *matCellDef="let element" mat-cell> {{element.instructorFullName}} </td>
+            </ng-container>
+            <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+            <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
           </table>
         </div>
       </div>
-      <div class="flex-auto my-4">
-        <table [dataSource]="pr.lessons" class="lessons" mat-table>
-          <ng-container matColumnDef="id">
-            <th *matHeaderCellDef mat-header-cell> Id.</th>
-            <td *matCellDef="let element" mat-cell> {{element.lessonId}} </td>
-          </ng-container>
-          <ng-container matColumnDef="data">
-            <th *matHeaderCellDef mat-header-cell> Data</th>
-            <td *matCellDef="let element" mat-cell> {{element.date}} </td>
-          </ng-container>
-          <ng-container matColumnDef="start">
-            <th *matHeaderCellDef mat-header-cell> Start</th>
-            <td *matCellDef="let element" mat-cell> {{element.timeStart}} </td>
-          </ng-container>
-          <ng-container matColumnDef="koniec">
-            <th *matHeaderCellDef mat-header-cell> Koniec</th>
-            <td *matCellDef="let element" mat-cell> {{element.timeEnd}} </td>
-          </ng-container>
-          <ng-container matColumnDef="instruktor">
-            <th *matHeaderCellDef mat-header-cell> Instruktor</th>
-            <td *matCellDef="let element" mat-cell> {{element.instructorFullName}} </td>
-          </ng-container>
-          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
-        </table>
-      </div>
-    </div>
-    <app-add-lesson></app-add-lesson>
-  </mat-tab>
+      <app-add-lesson></app-add-lesson>
+    </mat-tab>
+  </ng-container>
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">control_point</mat-icon>

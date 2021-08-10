@@ -2,8 +2,8 @@ export interface ILesson {
   lessonId?: number;
   productId?: number;
   date?: string;
-  timeStart?: string;
-  timeEnd?: string;
+  timeStart?: number;
+  hoursCount?: number;
   instructorId?: number;
   instructorFullName?: string;
   instructorEmail?: string;
