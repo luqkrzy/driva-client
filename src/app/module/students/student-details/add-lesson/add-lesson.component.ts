@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ILesson } from '../../../../model/lesson';
 
 @Component({
   selector: 'app-add-lesson',
@@ -7,7 +8,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./add-lesson.component.scss']
 })
 export class AddLessonComponent implements OnInit {
-  instructors: string[] = ['jan', 'Laszalo', 'Anna', 'Zdiosiek'];
+  instructors: number[] = [1, 2, 3, 4, 5];
+  @Input() productId: number;
   hours = [...Array.from({length: 14}, (_, i) => i + 7)];
   hoursCount = [...Array.from({length: 5}, (_, i) => i + 1)];
   newLesson: FormGroup = new FormGroup({});
@@ -24,12 +26,10 @@ export class AddLessonComponent implements OnInit {
   }
 
   onSave() {
-    console.log(this.newLesson.value);
-    // console.log(this.newLesson.value.date.toDateString());
-    console.log(this.newLesson.value.date.toISOString());
-    console.log(this.newLesson.value.date.toLocaleDateString());
-    // console.log(this.newLesson.value.date.toLocaleString());
-    // console.log(this.newLesson.value.date.toLocaleTimeString());
+    const date = this.newLesson.value.date.toISOString().slice(0, 10);
+    const newLesson: ILesson = this.newLesson.value;
+    newLesson.date = date;
+    console.log(newLesson);
   }
 
   validateForm(): boolean {
@@ -39,9 +39,10 @@ export class AddLessonComponent implements OnInit {
   private initLessonForm(): void {
     this.newLesson = this.fb.group({
       instructorId: [null, Validators.required],
-      date: [new Date().toISOString, Validators.required],
-      hour: [null, Validators.required],
+      date: [new Date().toLocaleDateString(), Validators.required],
+      timeStart: [null, Validators.required],
       hoursCount: [null, Validators.required],
+      productId: [this.productId, Validators.required],
     });
   }
 }

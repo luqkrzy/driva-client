@@ -29,7 +29,7 @@
         <td>
           <mat-form-field appearance="fill">
             <mat-label>Godzina</mat-label>
-            <mat-select formControlName="hour" required>
+            <mat-select formControlName="timeStart" required>
               <mat-option *ngFor="let hour of hours" [value]="hour">
                 {{hour}}
               </mat-option>
@@ -45,6 +45,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+
         </td>
         <td>
           <button (click)="onSave()" [disabled]="validateForm()" color="primary" mat-raised-button type="submit">

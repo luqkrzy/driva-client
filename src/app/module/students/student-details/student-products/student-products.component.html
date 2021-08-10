@@ -6,7 +6,7 @@
 <mat-tab-group #tabGroup>
   <ng-container *ngFor="let pr of products">
     <mat-tab>
-      <ng-template mat-tab-label>{{pr.productType.productCategory}} {{pr.productType.name}}&nbsp;
+      <ng-template mat-tab-label>{{pr.productTypeCategory}} {{pr.productTypeName}}&nbsp;
         <button [matMenuTriggerFor]="menu" aria-label="Toggle menu" class="more-button" mat-icon-button>
           <mat-icon class=text-md>more_vert</mat-icon>
         </button>
@@ -26,11 +26,11 @@
               </tr>
               <tr>
                 <td>Nazwa</td>
-                <td>{{pr.productType.name}}</td>
+                <td>{{pr.productTypeName}}</td>
               </tr>
               <tr>
                 <td>Kategoria</td>
-                <td>{{pr.productType.productCategory}}</td>
+                <td>{{pr.productTypeCategory}}</td>
               </tr>
               <tr>
                 <td>Liczba godzin</td>
@@ -46,7 +46,7 @@
               </tr>
               <tr>
                 <td>Opis</td>
-                <td>{{pr.productType.description}}</td>
+                <td>{{pr.productTypeDescription}}</td>
               </tr>
               </tbody>
             </table>
@@ -79,7 +79,7 @@
           </table>
         </div>
       </div>
-      <app-add-lesson></app-add-lesson>
+      <app-add-lesson [productId]="pr.id!"></app-add-lesson>
     </mat-tab>
   </ng-container>
   <mat-tab>

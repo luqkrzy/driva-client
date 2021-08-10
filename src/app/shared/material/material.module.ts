@@ -23,8 +23,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -66,7 +67,7 @@ const MaterialComponents = [
   MatTabsModule,
   MatRippleModule,
   MatDatepickerModule,
-  MatNativeDateModule,
+  MatMomentDateModule
 ];
 
 @NgModule({
