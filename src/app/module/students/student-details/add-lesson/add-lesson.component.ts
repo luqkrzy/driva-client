@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ILesson } from '../../../../model/lesson';
+import { LessonsService } from '../../../lessons/lessons.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-lesson',
@@ -13,8 +15,11 @@ export class AddLessonComponent implements OnInit {
   hours = [...Array.from({length: 14}, (_, i) => i + 7)];
   hoursCount = [...Array.from({length: 5}, (_, i) => i + 1)];
   newLesson: FormGroup = new FormGroup({});
+  private matSnackBarConfig: MatSnackBarConfig = new MatSnackBarConfig();
 
-  constructor(private fb: FormBuilder,) {
+  constructor(private fb: FormBuilder,
+    private lessonsService: LessonsService,
+    private snackBar: MatSnackBar) {
   }
 
   get date(): FormControl {
@@ -23,13 +28,15 @@ export class AddLessonComponent implements OnInit {
 
   ngOnInit(): void {
     this.initLessonForm();
+    this.matSnackBarConfig.duration = 5000;
   }
 
-  onSave() {
+  onSave(): void {
     const date = this.newLesson.value.date.toISOString().slice(0, 10);
     const newLesson: ILesson = this.newLesson.value;
     newLesson.date = date;
     console.log(newLesson);
+    this.saveLesson(newLesson);
   }
 
   validateForm(): boolean {
@@ -43,6 +50,13 @@ export class AddLessonComponent implements OnInit {
       timeStart: [null, Validators.required],
       hoursCount: [null, Validators.required],
       productId: [this.productId, Validators.required],
+    });
+  }
+
+  private saveLesson(lesson: ILesson): void {
+    this.lessonsService.createLesson(lesson).subscribe(result => {
+      this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
+      console.log(result);
     });
   }
 }

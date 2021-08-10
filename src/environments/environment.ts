@@ -8,7 +8,8 @@ export const environment = {
   studentsUrl: 'http://localhost:8080/api/students',
   accountUrl: 'http://localhost:8080/api/account',
   userUrl: 'http://localhost:8080/api/account',
-  productTypeUrl: 'http://localhost:8080/api/product-type'
+  productTypeUrl: 'http://localhost:8080/api/product-type',
+  lessonsUrl: 'http://localhost:8080/api/lessons'
 };
 
 /*

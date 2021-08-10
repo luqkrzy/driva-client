@@ -13,8 +13,8 @@ const routes: Routes = [
   {path: 'account', loadChildren: () => import('./module/account/account.module').then(m => m.AccountModule)},
   {path: 'test', loadChildren: () => import('./module/test/test.module').then(m => m.TestModule)},
   {path: 'product-type', loadChildren: () => import('./module/product-type/product-type.module').then(m => m.ProductTypeModule)},
-  {path: 'lessons', loadChildren: () => import('./lessons/lessons.module').then(m => m.LessonsModule)},
-  {path: 'instructors', loadChildren: () => import('./instructors/instructors.module').then(m => m.InstructorsModule)},
+  {path: 'lessons', loadChildren: () => import('./module/lessons/lessons.module').then(m => m.LessonsModule)},
+  {path: 'instructors', loadChildren: () => import('./module/instructors/instructors.module').then(m => m.InstructorsModule)},
   {path: '**', component: PageNotFoundComponent}
 ];
 
