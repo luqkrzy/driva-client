@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LessonsRoutingModule } from './lessons-routing.module';
 import { LessonsComponent } from './lessons.component';
+import { MaterialModule } from '../../shared/material/material.module';
 
 @NgModule({
   declarations: [
@@ -9,7 +10,8 @@ import { LessonsComponent } from './lessons.component';
   ],
   imports: [
     CommonModule,
-    LessonsRoutingModule
+    LessonsRoutingModule,
+    MaterialModule
   ]
 })
 export class LessonsModule {

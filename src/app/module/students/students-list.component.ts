@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -30,12 +30,14 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
     private studentService: StudentService,
     private router: Router,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private changeDetectorRefs: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
     this.dialogConfig.width = '800px';
     this.matSnackBarConfig.duration = 5000;
+
   }
 
   applyFilter(filterValue: any): void {
@@ -75,6 +77,8 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
   private saveStudent(student: IStudent): void {
     this.studentService.createStudent(student).subscribe((result: IStudent) => {
         this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
+        this.dataSource.data.push(result);
+        this.dataSource.data = this.dataSource.data;
         this.router.navigateByUrl('students/' + result.id);
       },
       (error: HttpErrorResponse) => {
