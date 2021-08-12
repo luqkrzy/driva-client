@@ -11,8 +11,8 @@
           <mat-form-field appearance="fill">
             <mat-label>Instruktor</mat-label>
             <mat-select formControlName="instructorId" required>
-              <mat-option *ngFor="let instructor of instructors" [value]="instructor">
-                {{instructor}}
+              <mat-option *ngFor="let instructor of instructors" [value]="instructor.id">
+                {{instructor.firstName}} {{instructor.lastName}}
               </mat-option>
             </mat-select>
           </mat-form-field>

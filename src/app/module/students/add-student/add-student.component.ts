@@ -24,40 +24,12 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
   ) {
   }
 
-  ngAfterViewInit(): void {
-    this.productTypeService.getAllProductTypes().subscribe(data => {
-        this.productTypes = data;
-      }
-    );
-  }
-
   get firstName(): AbstractControl {
     return this.newStudentForm.get('firstName') as AbstractControl;
   }
 
   get lastName(): AbstractControl {
     return this.newStudentForm.get('lastName') as AbstractControl;
-  }
-
-  get email(): AbstractControl {
-    return this.newStudentForm.get('email') as AbstractControl;
-  }
-
-  get phoneNumber(): AbstractControl {
-    return this.newStudentForm.get('phoneNumber') as AbstractControl;
-  }
-
-  get hoursLeft(): AbstractControl {
-    return this.newProductForm.get('hoursLeft') as AbstractControl;
-  }
-
-  get price(): AbstractControl {
-    return this.newProductForm.get('price') as AbstractControl;
-  }
-
-  ngOnInit(): void {
-    this.initStudentForm();
-    this.initProductForm();
   }
 
   onClose(): void {
@@ -123,5 +95,33 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
       isPaid: [{value: false, disabled: true}],
       price: [{value: 0, disabled: true}, [Validators.min(0), Validators.max(20000)]],
     });
+  }
+
+  get email(): AbstractControl {
+    return this.newStudentForm.get('email') as AbstractControl;
+  }
+
+  get phoneNumber(): AbstractControl {
+    return this.newStudentForm.get('phoneNumber') as AbstractControl;
+  }
+
+  get hoursLeft(): AbstractControl {
+    return this.newProductForm.get('hoursLeft') as AbstractControl;
+  }
+
+  get price(): AbstractControl {
+    return this.newProductForm.get('price') as AbstractControl;
+  }
+
+  ngOnInit(): void {
+    this.initStudentForm();
+    this.initProductForm();
+    this.productTypeService.getAllProductTypes().subscribe(data => {
+        this.productTypes = data;
+      }
+    );
+  }
+
+  ngAfterViewInit(): void {
   }
 }

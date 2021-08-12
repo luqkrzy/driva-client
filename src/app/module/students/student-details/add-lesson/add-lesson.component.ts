@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ILesson } from '../../../../model/lesson';
 import { LessonsService } from '../../../lessons/lessons.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { iInstructor } from '../../../../model/instructor';
+import { InstructorService } from '../../../instructors/instructor.service';
 
 @Component({
   selector: 'app-add-lesson',
@@ -10,7 +12,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
   styleUrls: ['./add-lesson.component.scss']
 })
 export class AddLessonComponent implements OnInit {
-  instructors: number[] = [1, 2, 3, 4, 5];
+  instructors: iInstructor[] = [];
   @Input() productId: number;
   hours = [...Array.from({length: 14}, (_, i) => i + 7)];
   hoursCount = [...Array.from({length: 5}, (_, i) => i + 1)];
@@ -19,7 +21,8 @@ export class AddLessonComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private lessonsService: LessonsService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private instructorService: InstructorService) {
   }
 
   get date(): FormControl {
@@ -29,6 +32,9 @@ export class AddLessonComponent implements OnInit {
   ngOnInit(): void {
     this.initLessonForm();
     this.matSnackBarConfig.duration = 5000;
+    this.instructorService.getAllInstructors().subscribe(data => {
+      this.instructors = data;
+    });
   }
 
   onSave(): void {
