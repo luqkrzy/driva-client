@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductLessonsService {
+export class SwitchProductService {
   private dataSource = new BehaviorSubject<IProduct>(new Product());
   product$ = this.dataSource.asObservable();
 

@@ -3,7 +3,7 @@ import { IProduct } from '../../../model/product';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProductService } from '../../products/product.service';
 import { ActivatedRoute } from '@angular/router';
-import { ProductLessonsService } from '../product-lessons.service';
+import { SwitchProductService } from '../switch-product.service';
 
 @Component({
   selector: 'app-student-products',
@@ -12,14 +12,14 @@ import { ProductLessonsService } from '../product-lessons.service';
 })
 export class StudentProductsComponent implements OnInit {
   isLoading: boolean = true;
-  displayedColumns: string[] = ['id', 'productTypeCategory', 'productTypeName', 'hoursLeft', 'bookOnline', 'isPaid', 'price', 'productTypeBasePrice'];
+  displayedColumns: string[] = ['id', 'productTypeCategory', 'productTypeName', 'hoursLeft', 'bookOnline', 'isPaid', 'price', 'productTypeBasePrice', 'edit'];
   columnsHeader: string[] = ['id', 'kat.', 'produkt', 'liczba godzin', 'online', 'zapłacono', 'cena', 'c. baz'];
   dataSource = new MatTableDataSource<IProduct>();
   product: IProduct;
 
   constructor(private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-    private productLessonsService: ProductLessonsService) {
+    private productLessonsService: SwitchProductService) {
   }
 
   ngOnInit(): void {
@@ -35,6 +35,14 @@ export class StudentProductsComponent implements OnInit {
 
   onClick(product: IProduct) {
     this.productLessonsService.switchProduct(product);
+  }
+
+  addProduct() {
+    console.log('add product');
+  }
+
+  editProduct(id: number) {
+    console.log(id);
   }
 }
 
