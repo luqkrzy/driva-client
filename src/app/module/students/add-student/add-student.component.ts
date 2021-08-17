@@ -20,16 +20,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddStudentComponent>,
-    private productTypeService: ProductTypeService,
-  ) {
-  }
-
-  get firstName(): AbstractControl {
-    return this.newStudentForm.get('firstName') as AbstractControl;
-  }
-
-  get lastName(): AbstractControl {
-    return this.newStudentForm.get('lastName') as AbstractControl;
+    private productTypeService: ProductTypeService,) {
   }
 
   onClose(): void {
@@ -95,6 +86,14 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
       isPaid: [{value: false, disabled: true}],
       price: [{value: 0, disabled: true}, [Validators.min(0), Validators.max(20000)]],
     });
+  }
+
+  get firstName(): AbstractControl {
+    return this.newStudentForm.get('firstName') as AbstractControl;
+  }
+
+  get lastName(): AbstractControl {
+    return this.newStudentForm.get('lastName') as AbstractControl;
   }
 
   get email(): AbstractControl {

@@ -1,8 +1,10 @@
-<mat-card class="mat-elevation-z6">
+<mat-card class="">
   <span class="">Produkty</span>
-  <mat-icon (click)="addProduct()" class="float-right" color="primary">control_point</mat-icon>
+  <mat-icon (click)="addProduct()" class="float-right cursor-pointer hover:text-blue-500" color="primary">
+    control_point
+  </mat-icon>
   <div class="table-container">
-    <table [dataSource]="dataSource" class="w-full" mat-table>
+    <table [dataSource]="products" class="w-full" mat-table>
       <ng-container matColumnDef="id">
         <th *matHeaderCellDef mat-header-cell> Id</th>
         <td *matCellDef="let element" mat-cell> {{element.id}} </td>
@@ -46,7 +48,7 @@
       <ng-container matColumnDef="edit">
         <th *matHeaderCellDef mat-header-cell></th>
         <td *matCellDef="let prod" mat-cell>
-          <mat-icon (click)="editProduct(prod.id)" color="primary">edit</mat-icon>
+          <mat-icon (click)="editProduct(prod)" color="primary">edit</mat-icon>
 
         </td>
       </ng-container>

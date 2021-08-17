@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -30,8 +30,7 @@ export class StudentsListComponent implements OnInit, AfterViewInit {
     private studentService: StudentService,
     private router: Router,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private changeDetectorRefs: ChangeDetectorRef) {
+    private snackBar: MatSnackBar,) {
   }
 
   ngOnInit(): void {

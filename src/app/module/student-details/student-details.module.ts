@@ -6,6 +6,8 @@ import { StudentInfoComponent } from './student-info/student-info.component';
 import { StudentProductsComponent } from './student-products/student-products.component';
 import { StudentLessonsComponent } from './student-lessons/student-lessons.component';
 import { MaterialModule } from '../../shared/material/material.module';
+import { UpdateProductComponent } from './update-product/update-product.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,11 +15,13 @@ import { MaterialModule } from '../../shared/material/material.module';
     StudentInfoComponent,
     StudentProductsComponent,
     StudentLessonsComponent,
+    UpdateProductComponent,
   ],
   imports: [
     CommonModule,
     StudentDetailsRoutingModule,
     MaterialModule,
+    ReactiveFormsModule,
   ]
 })
 export class StudentDetailsModule {

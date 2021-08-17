@@ -28,6 +28,10 @@ export class ProductService {
       .pipe(shareReplay(1));
   }
 
+  updateProduct(product: IProduct): Observable<IProduct> {
+    return this.http.patch<IProduct>(`${this.url}/${product.id}`, product);
+  }
+
   getAllProducts(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(this.url).pipe(
       shareReplay(),

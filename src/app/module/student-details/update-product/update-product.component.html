@@ -1,0 +1,46 @@
+<mat-dialog-content>
+  <form [formGroup]="productForm">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Kategoria</mat-label>
+      <mat-select formControlName="productTypeId" required>
+        <mat-option *ngFor="let pt of productTypes" [value]="pt.id">
+          <span class="font-bold">Kat. {{pt.productCategory}}</span>
+          - {{pt.name}}, godzin {{pt.lessonsHours}},
+          cena baz.: <span class="font-bold">{{pt.basePrice}}zł</span>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Liczba godzin</mat-label>
+      <input formControlName="hoursLeft" matInput type="number">
+      <mat-error *ngIf="hoursLeft?.hasError('max')">
+        za wysoka liczba godzin
+      </mat-error>
+      <mat-error *ngIf="hoursLeft?.hasError('min')">
+        za mała liczba godzin
+      </mat-error>
+    </mat-form-field>
+    <section class="flex space-x-4">
+      <p>
+        <mat-checkbox color="primary" formControlName="bookOnline">Rezerwacja online</mat-checkbox>
+      </p>
+      <p>
+        <mat-checkbox color="primary" formControlName="isPaid">Zapłacone</mat-checkbox>
+      </p>
+    </section>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Cena</mat-label>
+      <input formControlName="price" matInput type="number">
+      <span matSuffix>PLN</span>
+      <mat-error *ngIf="price?.hasError('max')">
+        cena jest jest za wysoka
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="float-right">
+  <button (click)="onClose()" mat-raised-button>anuluj</button>
+  <button (click)="onUpdate()" [disabled]="validateForm()" color="primary" mat-raised-button>aktualizuj</button>
+</mat-dialog-actions>
+
+
