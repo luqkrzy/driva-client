@@ -1,0 +1,44 @@
+<mat-card class="mat-elevation-z8">
+  <mat-card-header>
+    <mat-card-title>
+      <button [matMenuTriggerFor]="menu" aria-label="Toggle menu" class="more-button" mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item>Expand</button>
+        <button mat-menu-item>Remove</button>
+      </mat-menu>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="">
+    <table class="">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nazwa</th>
+        <th>Kategoria</th>
+        <th>Liczba godzin</th>
+        <th>Online</th>
+        <th>Online</th>
+        <th>Zapłacono</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!--      <ng-container *ngFor="let prod of products">-->
+      <!--        <tr>-->
+      <!--          <td>{{prod.id}}</td>-->
+      <!--          <td>{{prod.productTypeName}}</td>-->
+      <!--          <td>{{prod.productTypeCategory}}</td>-->
+      <!--          <td>{{prod.hoursLeft}}</td>-->
+      <!--          <td>{{prod.bookOnline}}</td>-->
+      <!--          <td>{{prod.isPaid}}</td>-->
+      <!--        </tr>-->
+      <!--      </ng-container>-->
+
+
+      </tbody>
+    </table>
+
+
+  </mat-card-content>
+</mat-card>

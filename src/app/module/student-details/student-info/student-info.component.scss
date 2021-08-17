@@ -1,0 +1,19 @@
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+td {
+  padding: 1rem;
+}
+
+table {
+  width: 100%;
+}
+
+mat-card-content {
+  td {
+    float: left;
+  }
+}

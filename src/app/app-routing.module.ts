@@ -15,6 +15,7 @@ const routes: Routes = [
   {path: 'product-type', loadChildren: () => import('./module/product-type/product-type.module').then(m => m.ProductTypeModule)},
   {path: 'lessons', loadChildren: () => import('./module/lessons/lessons.module').then(m => m.LessonsModule)},
   {path: 'instructors', loadChildren: () => import('./module/instructors/instructors.module').then(m => m.InstructorsModule)},
+  {path: 'students/:id', loadChildren: () => import('./module/student-details/student-details.module').then(m => m.StudentDetailsModule)},
   {path: '**', component: PageNotFoundComponent}
 ];
 
