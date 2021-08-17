@@ -22,7 +22,6 @@ export class StudentInfoComponent implements OnInit {
     this.studentService.getStudent(id).subscribe((result: IStudent) => {
       this.student = result;
       this.isLoading = false;
-      console.log(result.products);
     });
   }
 }

@@ -1,8 +1,7 @@
-import { ILesson } from './lesson';
-
 export interface IProduct {
   id?: number;
   studentId: number;
+  studentFullName: string;
   hoursLeft: number;
   bookOnline: boolean;
   isPaid: boolean;
@@ -13,12 +12,12 @@ export interface IProduct {
   productTypeCategory: string;
   productTypeBasePrice: number;
   productTypeLessonsHours: number;
-  lessons: ILesson[];
 }
 
 export class Product implements Product {
   id?: number;
   studentId: number;
+  studentFullName: string;
   hoursLeft: number;
   bookOnline: boolean;
   isPaid: boolean;
@@ -29,6 +28,5 @@ export class Product implements Product {
   productTypeCategory: string;
   productTypeBasePrice: number;
   productTypeLessonsHours: number;
-  lessons: ILesson[];
 }
 
