@@ -41,6 +41,10 @@ export class UpdateProductComponent implements OnInit {
     return this.productForm.get('isPaid') as AbstractControl;
   }
 
+  get productTypeName(): AbstractControl {
+    return this.productForm.get('productTypeName') as AbstractControl;
+  }
+
   ngOnInit(): void {
     this.product = this.data;
     this.productTypeService.getAllProductTypes().subscribe(data => {
@@ -55,6 +59,7 @@ export class UpdateProductComponent implements OnInit {
 
   onConfirm(): void {
     const product: IProduct = this.productForm.value;
+    console.log(product);
     this.dialogRef.close(product);
   }
 
@@ -63,11 +68,18 @@ export class UpdateProductComponent implements OnInit {
       (this.productForm.valid && this.productForm.pristine);
   }
 
+  productName(productType: IProductType) {
+    this.productTypeName.setValue(productType.name);
+    this.hoursLeft.setValue(productType.lessonsHours);
+    this.price.setValue(productType.basePrice);
+  }
+
   private initProductForm() {
     this.productForm = this.fb.group({
       id: [this.product.id],
       studentId: [this.product.studentId],
       productTypeId: [this.product.productTypeId, Validators.required],
+      productTypeName: [null],
       hoursLeft: [this.product.hoursLeft, [
         Validators.required,
         Validators.min(1),

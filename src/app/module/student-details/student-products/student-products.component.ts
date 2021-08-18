@@ -72,6 +72,7 @@ export class StudentProductsComponent implements OnInit {
         this.productService.updateProduct(data).subscribe(resp => {
           if (resp.id) {
             this.products.data.filter(p => p.id === data.id).map(p => {
+              p.productTypeName = data.productTypeName;
               p.productTypeId = data.productTypeId;
               p.hoursLeft = data.hoursLeft;
               p.bookOnline = data.bookOnline;

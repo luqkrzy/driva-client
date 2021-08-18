@@ -4,9 +4,11 @@
       <mat-label>Kategoria</mat-label>
       <mat-select formControlName="productTypeId" required>
         <mat-option *ngFor="let pt of productTypes" [value]="pt.id">
-          <span class="font-bold">Kat. {{pt.productCategory}}</span>
-          - {{pt.name}}, godzin {{pt.lessonsHours}},
-          cena baz.: <span class="font-bold">{{pt.basePrice}}zł</span>
+          <div (click)="productName(pt)">
+            <span class="font-bold">Kat. {{pt.productCategory}}</span>
+            - {{pt.name}}, godzin {{pt.lessonsHours}},
+            cena baz.: <span class="font-bold">{{pt.basePrice}}zł</span>
+          </div>
         </mat-option>
       </mat-select>
     </mat-form-field>
