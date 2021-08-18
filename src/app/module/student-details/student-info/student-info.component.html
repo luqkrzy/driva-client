@@ -6,7 +6,7 @@
       </button>
       <mat-menu #menu="matMenu" xPosition="before">
         <button (click)="onEdit()" mat-menu-item>Edytuj</button>
-        <button mat-menu-item>Usuń</button>
+        <button (click)="onDelete()" mat-menu-item>Usuń</button>
       </mat-menu>
     </mat-card-title>
   </mat-card-header>

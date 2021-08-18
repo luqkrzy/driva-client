@@ -31,4 +31,9 @@ export class StudentService {
   doesEmailExist(email: string): Observable<Boolean> {
     return this.http.get<Boolean>(`${this.url}/exist/${email}`);
   }
+
+  deleteStudent(id: number) {
+    return this.http.delete(`${this.url}/${id}`, {observe: 'response'})
+      .pipe(shareReplay(1));
+  }
 }

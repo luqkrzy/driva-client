@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { UpdateStudentAccountComponent } from '../update-student-account/update-student-account.component';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-student-info',
@@ -42,6 +43,21 @@ export class StudentInfoComponent implements OnInit {
         this.studentService.updateStudent(data.id as number, data).subscribe(student => {
           this.student = student;
           this.snackBar.open("Zaktualizowano", 'OK', this.matSnackBarConfig);
+        });
+      }
+    });
+  }
+
+  onDelete() {
+    this.dialogConfig.data = this.student.id;
+    const dialogRef = this.dialog.open(DeleteDialogComponent, this.dialogConfig);
+    dialogRef.afterClosed().subscribe((id: number) => {
+      if (id) {
+        this.studentService.deleteStudent(id).subscribe(resp => {
+          if (resp.status === 204) {
+            this.snackBar.open('Usunięto', 'OK', this.matSnackBarConfig);
+            this.router.navigateByUrl('students');
+          }
         });
       }
     });
