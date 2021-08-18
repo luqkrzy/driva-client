@@ -26,9 +26,8 @@ export class StudentInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = +this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.studentService.getStudent(id).subscribe((result: IStudent) => {
-      this.student = result;
+    this.activatedRoute.data.subscribe(data => {
+      this.student = data['student'];
       this.isLoading = false;
     });
     this.dialogConfig.width = '500px';

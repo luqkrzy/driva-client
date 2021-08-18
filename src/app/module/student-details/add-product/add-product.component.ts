@@ -19,9 +19,6 @@ export class AddProductComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private studentId: number) {
   }
 
-  // get hoursLeft(): AbstractControl {
-  //   return this.productForm.get('hoursLeft') as AbstractControl;
-  // }
   get price(): AbstractControl {
     return this.productForm.get('price') as AbstractControl;
   }
@@ -55,11 +52,6 @@ export class AddProductComponent implements OnInit {
     this.productForm = this.fb.group({
       studentId: [this.studentId],
       productTypeId: [null, Validators.required],
-      // hoursLeft: [null, [
-      //   Validators.required,
-      //   Validators.min(1),
-      //   Validators.max(300),
-      //   Validators.pattern(Constant.NUMBER_ONLY_REGEX)]],
       bookOnline: [null],
       isPaid: [null],
       price: [null, [Validators.min(0), Validators.max(20000)]],

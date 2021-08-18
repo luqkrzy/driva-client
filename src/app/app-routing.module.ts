@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { StudentResolver } from './resolver/student.resolver';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: {breadcrumb: {alias: 'Home'}}},
@@ -15,8 +16,11 @@ const routes: Routes = [
   {path: 'product-type', loadChildren: () => import('./module/product-type/product-type.module').then(m => m.ProductTypeModule)},
   {path: 'lessons', loadChildren: () => import('./module/lessons/lessons.module').then(m => m.LessonsModule)},
   {path: 'instructors', loadChildren: () => import('./module/instructors/instructors.module').then(m => m.InstructorsModule)},
-  {path: 'students/:id', loadChildren: () => import('./module/student-details/student-details.module').then(m => m.StudentDetailsModule)},
-  {path: '**', component: PageNotFoundComponent}
+  {
+    path: 'students/:id', loadChildren: () => import('./module/student-details/student-details.module').then(m => m.StudentDetailsModule),
+    resolve: {student: StudentResolver}
+  },
+  {path: '**', component: PageNotFoundComponent, pathMatch: 'full'}
 ];
 
 @NgModule({

@@ -18,7 +18,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         const errorMessage = this.appErrorHandler.setError(error);
         this.matSnackBar.open(errorMessage, 'OK', this.matSnackBarConfig);
-        console.log(error.error);
         return throwError(error.error);
       })
     );

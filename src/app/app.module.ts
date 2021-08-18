@@ -49,6 +49,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
               AppErrorHandler,
   ],
   bootstrap: [AppComponent],
+  exports: [
+    PageNotFoundComponent
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
