@@ -54,7 +54,7 @@ export class UpdateStudentAccountComponent implements OnInit {
     this.updateAccount = this.fb.group({
       id: [this.student.id],
       firstName: [this.student.firstName,
-        [Validators.minLength(4),
+        [Validators.minLength(2),
          Validators.required,
          Validators.pattern(Constant.NAME_REGEX)]],
       lastName: [this.student.lastName,
@@ -63,7 +63,7 @@ export class UpdateStudentAccountComponent implements OnInit {
          Validators.pattern(Constant.NAME_REGEX)]],
       email: [this.student.email,
         [Validators.pattern(Constant.EMAIL_REGEX),
-         Validators.required], [this.emailExistsValidator()]],
+         Validators.required]],
       phoneNumber: [this.student.phoneNumber,
         [Validators.pattern(Constant.PHONE_REGEX),
          Validators.required]]
