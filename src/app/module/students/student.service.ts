@@ -22,4 +22,13 @@ export class StudentService {
     return this.http.get<IStudent>(`${this.url}/${id}`)
       .pipe(shareReplay(1));
   }
+
+  updateStudent(id: number, student: IStudent): Observable<IStudent> {
+    return this.http.patch<IStudent>(`${this.url}/${id}`, student)
+      .pipe(shareReplay(1));
+  }
+
+  doesEmailExist(email: string): Observable<Boolean> {
+    return this.http.get<Boolean>(`${this.url}/exist/${email}`);
+  }
 }

@@ -38,8 +38,6 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
   }
 
   validateForm(): boolean {
-    // console.log('enebleSelect: ' + this.enableSelect.value);
-    // console.log('productForm: ' + this.newProductForm.valid);
     return this.newStudentForm.invalid || (this.newStudentForm.valid &&
       this.switchEnabled && this.newProductForm.invalid);
   }
@@ -77,11 +75,11 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
   private initProductForm(): void {
     this.newProductForm = this.fb.group({
       productTypeId: [{value: null, disabled: true}, Validators.required],
-      hoursLeft: [{value: 50, disabled: true}, [
-        Validators.required,
-        Validators.min(1),
-        Validators.max(2000),
-        Validators.pattern(Constant.NUMBER_ONLY_REGEX),]],
+      // hoursLeft: [{value: 50, disabled: true}, [
+      //   Validators.required,
+      //   Validators.min(1),
+      //   Validators.max(2000),
+      //   Validators.pattern(Constant.NUMBER_ONLY_REGEX),]],
       bookOnline: [{value: false, disabled: true}],
       isPaid: [{value: false, disabled: true}],
       price: [{value: 0, disabled: true}, [Validators.min(0), Validators.max(20000)]],
@@ -104,10 +102,9 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
     return this.newStudentForm.get('phoneNumber') as AbstractControl;
   }
 
-  get hoursLeft(): AbstractControl {
-    return this.newProductForm.get('hoursLeft') as AbstractControl;
-  }
-
+  // get hoursLeft(): AbstractControl {
+  //   return this.newProductForm.get('hoursLeft') as AbstractControl;
+  // }
   get price(): AbstractControl {
     return this.newProductForm.get('price') as AbstractControl;
   }
@@ -116,7 +113,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
     this.initStudentForm();
     this.initProductForm();
     this.productTypeService.getAllProductTypes().subscribe(data => {
-        this.productTypes = data;
+      this.productTypes = data;
       }
     );
   }

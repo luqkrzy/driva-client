@@ -10,6 +10,7 @@ import { UpdateProductComponent } from './update-product/update-product.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { UpdateStudentAccountComponent } from './update-student-account/update-student-account.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AddProductComponent } from './add-product/add-product.component';
     UpdateProductComponent,
     DeleteDialogComponent,
     AddProductComponent,
+    UpdateStudentAccountComponent,
   ],
   imports: [
     CommonModule,

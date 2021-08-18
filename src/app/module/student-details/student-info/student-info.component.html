@@ -5,7 +5,7 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu" xPosition="before">
-        <button mat-menu-item>Edytuj</button>
+        <button (click)="onEdit()" mat-menu-item>Edytuj</button>
         <button mat-menu-item>Usuń</button>
       </mat-menu>
     </mat-card-title>

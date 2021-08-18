@@ -52,15 +52,15 @@ export class StudentProductsComponent implements OnInit {
     this.dialogConfig.data = this.studentId;
     const dialogRef = this.dialog.open(AddProductComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe((data: IProduct) => {
-      console.log(data);
-      this.productService.createProduct(data).subscribe((product: IProduct) => {
-        if (product) {
-          console.log(product);
-          this.products.data.push(product);
-          this.products.data = this.products.data;
-          this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
-        }
-      });
+      if (data) {
+        this.productService.createProduct(data).subscribe((product: IProduct) => {
+          if (product) {
+            this.products.data.push(product);
+            this.products.data = this.products.data;
+            this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
+          }
+        });
+      }
     });
   }
 
