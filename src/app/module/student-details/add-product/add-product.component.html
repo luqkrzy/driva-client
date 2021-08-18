@@ -10,16 +10,16 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="w-full">
-      <mat-label>Liczba godzin</mat-label>
-      <input formControlName="hoursLeft" matInput type="number">
-      <mat-error *ngIf="hoursLeft?.hasError('max')">
-        za wysoka liczba godzin
-      </mat-error>
-      <mat-error *ngIf="hoursLeft?.hasError('min')">
-        za mała liczba godzin
-      </mat-error>
-    </mat-form-field>
+    <!--    <mat-form-field appearance="fill" class="w-full">-->
+    <!--      <mat-label>Liczba godzin</mat-label>-->
+    <!--      <input formControlName="hoursLeft" matInput type="number">-->
+    <!--      <mat-error *ngIf="hoursLeft?.hasError('max')">-->
+    <!--        za wysoka liczba godzin-->
+    <!--      </mat-error>-->
+    <!--      <mat-error *ngIf="hoursLeft?.hasError('min')">-->
+    <!--        za mała liczba godzin-->
+    <!--      </mat-error>-->
+    <!--    </mat-form-field>-->
     <section class="flex space-x-4">
       <p>
         <mat-checkbox color="primary" formControlName="bookOnline">Rezerwacja online</mat-checkbox>
@@ -42,5 +42,3 @@
   <button (click)="onClose()" mat-raised-button>anuluj</button>
   <button (click)="onConfirm()" [disabled]="validateForm()" color="primary" mat-raised-button>OK</button>
 </mat-dialog-actions>
-
-

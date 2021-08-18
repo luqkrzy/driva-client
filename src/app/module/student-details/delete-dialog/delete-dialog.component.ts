@@ -4,12 +4,12 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-delete-product',
-  templateUrl: './delete-product.component.html',
-  styleUrls: ['./delete-product.component.scss']
+  templateUrl: './delete-dialog.component.html',
+  styleUrls: ['./delete-dialog.component.scss']
 })
-export class DeleteProductComponent implements OnInit {
+export class DeleteDialogComponent implements OnInit {
   constructor(private productTypeService: ProductTypeService,
-    private dialogRef: MatDialogRef<DeleteProductComponent>,
+    private dialogRef: MatDialogRef<DeleteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: number) {
   }
 

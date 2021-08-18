@@ -7,7 +7,8 @@ import { SwitchProductService } from '../switch-product.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { UpdateProductComponent } from '../update-product/update-product.component';
-import { DeleteProductComponent } from '../delete-product/delete-product.component';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { AddProductComponent } from '../add-product/add-product.component';
 
 @Component({
   selector: 'app-student-products',
@@ -17,9 +18,9 @@ import { DeleteProductComponent } from '../delete-product/delete-product.compone
 export class StudentProductsComponent implements OnInit {
   isLoading: boolean = true;
   displayedColumns: string[] = ['id', 'productTypeCategory', 'productTypeName', 'hoursLeft', 'bookOnline', 'isPaid', 'price', 'productTypeBasePrice', 'edit', 'del'];
-  columnsHeader: string[] = ['id', 'kat.', 'produkt', 'liczba godzin', 'online', 'zapłacono', 'cena', 'c. baz'];
   products = new MatTableDataSource<IProduct>();
   product: IProduct;
+  private studentId: number;
   private dialogConfig: MatDialogConfig = new MatDialogConfig();
   private matSnackBarConfig: MatSnackBarConfig = new MatSnackBarConfig();
 
@@ -31,8 +32,8 @@ export class StudentProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = +this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.productService.getProductByStudentId(id).subscribe(data => {
+    this.studentId = +this.activatedRoute.snapshot.paramMap.get('id')!;
+    this.productService.getProductByStudentId(this.studentId).subscribe(data => {
       this.products.data = data;
       this.isLoading = false;
     });
@@ -48,7 +49,19 @@ export class StudentProductsComponent implements OnInit {
   }
 
   addProduct() {
-    console.log('add product');
+    this.dialogConfig.data = this.studentId;
+    const dialogRef = this.dialog.open(AddProductComponent, this.dialogConfig);
+    dialogRef.afterClosed().subscribe((data: IProduct) => {
+      console.log(data);
+      this.productService.createProduct(data).subscribe((product: IProduct) => {
+        if (product) {
+          console.log(product);
+          this.products.data.push(product);
+          this.products.data = this.products.data;
+          this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
+        }
+      });
+    });
   }
 
   editProduct(product: IProduct): void {
@@ -73,9 +86,8 @@ export class StudentProductsComponent implements OnInit {
   }
 
   deleteProduct(id: number) {
-    console.log(id);
     this.dialogConfig.data = id;
-    const dialogRef = this.dialog.open(DeleteProductComponent, this.dialogConfig);
+    const dialogRef = this.dialog.open(DeleteDialogComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe(id => {
       this.productService.deleteProduct(id).subscribe(resp => {
         if (resp.status === 204) {

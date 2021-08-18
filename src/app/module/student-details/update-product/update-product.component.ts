@@ -18,7 +18,7 @@ export class UpdateProductComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private productTypeService: ProductTypeService,
     private dialogRef: MatDialogRef<UpdateProductComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IProduct) {
+    @Inject(MAT_DIALOG_DATA) private data: IProduct) {
   }
 
   get hoursLeft(): AbstractControl {
@@ -27,6 +27,18 @@ export class UpdateProductComponent implements OnInit {
 
   get price(): AbstractControl {
     return this.productForm.get('price') as AbstractControl;
+  }
+
+  get productTypeId(): AbstractControl {
+    return this.productForm.get('productTypeId') as AbstractControl;
+  }
+
+  get bookOnline(): AbstractControl {
+    return this.productForm.get('bookOnline') as AbstractControl;
+  }
+
+  get isPaid(): AbstractControl {
+    return this.productForm.get('isPaid') as AbstractControl;
   }
 
   ngOnInit(): void {
@@ -41,7 +53,7 @@ export class UpdateProductComponent implements OnInit {
     this.dialogRef.close(false);
   }
 
-  onUpdate(): void {
+  onConfirm(): void {
     const product: IProduct = this.productForm.value;
     this.dialogRef.close(product);
   }

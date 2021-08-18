@@ -7,8 +7,9 @@ import { StudentProductsComponent } from './student-products/student-products.co
 import { StudentLessonsComponent } from './student-lessons/student-lessons.component';
 import { MaterialModule } from '../../shared/material/material.module';
 import { UpdateProductComponent } from './update-product/update-product.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { DeleteProductComponent } from './delete-product/delete-product.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +18,15 @@ import { DeleteProductComponent } from './delete-product/delete-product.componen
     StudentProductsComponent,
     StudentLessonsComponent,
     UpdateProductComponent,
-    DeleteProductComponent,
+    DeleteDialogComponent,
+    AddProductComponent,
   ],
   imports: [
     CommonModule,
     StudentDetailsRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class StudentDetailsModule {
