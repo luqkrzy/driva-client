@@ -4,22 +4,14 @@
       <mat-label>Kategoria</mat-label>
       <mat-select formControlName="productTypeId" required>
         <mat-option *ngFor="let pt of productTypes" [value]="pt.id">
-          <span class="font-bold">Kat. {{pt.productCategory}}</span>
-          - {{pt.name}}, godzin {{pt.lessonsHours}},
-          cena baz.: <span class="font-bold">{{pt.basePrice}}zł</span>
+          <div (click)="switchPrice(pt.basePrice!)">
+            <span class="font-bold">Kat. {{pt.productCategory}}</span>
+            - {{pt.name}}, godzin {{pt.lessonsHours}},
+            cena baz.: <span class="font-bold">{{pt.basePrice}}zł</span>
+          </div>
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <!--    <mat-form-field appearance="fill" class="w-full">-->
-    <!--      <mat-label>Liczba godzin</mat-label>-->
-    <!--      <input formControlName="hoursLeft" matInput type="number">-->
-    <!--      <mat-error *ngIf="hoursLeft?.hasError('max')">-->
-    <!--        za wysoka liczba godzin-->
-    <!--      </mat-error>-->
-    <!--      <mat-error *ngIf="hoursLeft?.hasError('min')">-->
-    <!--        za mała liczba godzin-->
-    <!--      </mat-error>-->
-    <!--    </mat-form-field>-->
     <section class="flex space-x-4">
       <p>
         <mat-checkbox color="primary" formControlName="bookOnline">Rezerwacja online</mat-checkbox>

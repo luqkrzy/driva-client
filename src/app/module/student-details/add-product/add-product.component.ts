@@ -57,4 +57,8 @@ export class AddProductComponent implements OnInit {
       price: [null, [Validators.min(0), Validators.max(20000)]],
     });
   }
+
+  switchPrice(price: number) {
+    this.price.setValue(price);
+  }
 }
