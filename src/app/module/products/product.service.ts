@@ -23,6 +23,11 @@ export class ProductService {
       .pipe(shareReplay(1));
   }
 
+  deleteProduct(id: number) {
+    return this.http.delete(`${this.url}/${id}`, {observe: 'response'})
+      .pipe(shareReplay(1));
+  }
+
   getProductByStudentId(id: number): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(`${this.url}/student/${id}`)
       .pipe(shareReplay(1));

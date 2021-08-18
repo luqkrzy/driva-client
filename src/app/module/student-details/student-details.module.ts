@@ -8,6 +8,7 @@ import { StudentLessonsComponent } from './student-lessons/student-lessons.compo
 import { MaterialModule } from '../../shared/material/material.module';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteProductComponent } from './delete-product/delete-product.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     StudentProductsComponent,
     StudentLessonsComponent,
     UpdateProductComponent,
+    DeleteProductComponent,
   ],
   imports: [
     CommonModule,

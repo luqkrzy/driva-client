@@ -7,6 +7,7 @@ import { SwitchProductService } from '../switch-product.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { UpdateProductComponent } from '../update-product/update-product.component';
+import { DeleteProductComponent } from '../delete-product/delete-product.component';
 
 @Component({
   selector: 'app-student-products',
@@ -15,7 +16,7 @@ import { UpdateProductComponent } from '../update-product/update-product.compone
 })
 export class StudentProductsComponent implements OnInit {
   isLoading: boolean = true;
-  displayedColumns: string[] = ['id', 'productTypeCategory', 'productTypeName', 'hoursLeft', 'bookOnline', 'isPaid', 'price', 'productTypeBasePrice', 'edit'];
+  displayedColumns: string[] = ['id', 'productTypeCategory', 'productTypeName', 'hoursLeft', 'bookOnline', 'isPaid', 'price', 'productTypeBasePrice', 'edit', 'del'];
   columnsHeader: string[] = ['id', 'kat.', 'produkt', 'liczba godzin', 'online', 'zapłacono', 'cena', 'c. baz'];
   products = new MatTableDataSource<IProduct>();
   product: IProduct;
@@ -54,7 +55,7 @@ export class StudentProductsComponent implements OnInit {
     this.dialogConfig.data = product;
     const dialogRef = this.dialog.open(UpdateProductComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe((data: IProduct) => {
-      if (data.id != null) {
+      if (data) {
         this.productService.updateProduct(data).subscribe(resp => {
           if (resp.id) {
             this.products.data.filter(p => p.id === data.id).map(p => {
@@ -68,6 +69,20 @@ export class StudentProductsComponent implements OnInit {
           }
         });
       }
+    });
+  }
+
+  deleteProduct(id: number) {
+    console.log(id);
+    this.dialogConfig.data = id;
+    const dialogRef = this.dialog.open(DeleteProductComponent, this.dialogConfig);
+    dialogRef.afterClosed().subscribe(id => {
+      this.productService.deleteProduct(id).subscribe(resp => {
+        if (resp.status === 204) {
+          this.products.data = this.products.data.filter(p => p.id !== id);
+          this.snackBar.open('Usunięto', 'OK', this.matSnackBarConfig);
+        }
+      });
     });
   }
 }
