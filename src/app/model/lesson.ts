@@ -1,5 +1,5 @@
 export interface ILesson {
-  lessonId?: number;
+  id: number;
   productId?: number;
   date?: string;
   timeStart?: number;
@@ -11,7 +11,7 @@ export interface ILesson {
 }
 
 export interface IGeneralLesson {
-  lessonId: number;
+  id: number;
   productId: number;
   date: string;
   timeStart: number;

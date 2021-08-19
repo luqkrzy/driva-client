@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../../model/product';
 import { SwitchProductService } from '../switch-product.service';
 import { LessonsService } from '../../lessons/lessons.service';
-import { IGeneralLesson, ILesson } from '../../../model/lesson';
+import { ILesson } from '../../../model/lesson';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
@@ -15,8 +15,8 @@ import { AddLessonComponent } from '../add-lesson/add-lesson.component';
 })
 export class StudentLessonsComponent implements OnInit {
   isLoading: boolean = true;
-  columns = ['lessonId', 'date', 'timeStart', 'hoursCount', 'instructorFistName', 'instructorLastName', 'instructorEmail', 'instructorPhoneNumber', 'edit'];
-  displayedColumns = ['id', 'data', 'start', 'l. godz', 'i. imię', 'i. naz.', 'i email', 'i. tel.', '',];
+  columns = ['id', 'date', 'timeStart', 'hoursCount', 'instructorFistName', 'instructorLastName', 'instructorEmail', 'instructorPhoneNumber', 'edit'];
+  displayedColumns = ['id', 'data', 'start', 'l. godz', 'i. imię', 'i. naz.', 'i. email', 'i. tel.', '',];
   product: IProduct;
   lessons = new MatTableDataSource<ILesson>();
   switchAddButton: boolean = true;
@@ -49,6 +49,7 @@ export class StudentLessonsComponent implements OnInit {
       dialogRef.afterClosed().subscribe((lesson: ILesson) => {
         if (lesson) {
           this.lessonsService.createLesson(lesson).subscribe((result: ILesson) => {
+            console.log(result);
             this.lessons.data.push(result);
             this.lessons.data = this.lessons.data;
             this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
@@ -76,11 +77,11 @@ export class StudentLessonsComponent implements OnInit {
     this.isLoading = false;
   }
 
-  editLesson(lesson: IGeneralLesson) {
+  editLesson(lesson: ILesson) {
     console.log('edit lesson');
   }
 
-  deleteLesson(lesson: IGeneralLesson) {
+  deleteLesson(lesson: ILesson) {
   }
 
   private switchButton() {

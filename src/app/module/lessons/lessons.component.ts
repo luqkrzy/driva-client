@@ -31,10 +31,6 @@ export class LessonsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.lessonsService.lessons$.subscribe(result => {
-      this.lessons = result;
-      console.log(result);
-    });
   }
 
   ngOnDestroy(): void {

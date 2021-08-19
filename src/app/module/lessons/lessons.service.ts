@@ -57,8 +57,8 @@ export class LessonsService implements OnInit {
       .pipe(shareReplay(1));
   }
 
-  getLessonsByProductId(productId: number): Observable<IGeneralLesson[]> {
-    return this.http.get<IGeneralLesson[]>(`${this.url}/product/${productId}`).pipe(
+  getLessonsByProductId(productId: number): Observable<ILesson[]> {
+    return this.http.get<ILesson[]>(`${this.url}/product/${productId}`).pipe(
       shareReplay(),
     );
   }
