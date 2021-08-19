@@ -10,7 +10,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Data</mat-label>
-      <input [formControl]="date" [matDatepicker]="picker" formControlName="date" matInput required>
+      <input [formControl]="date" [matDatepicker]="picker" [min]="todayDate" formControlName="date" matInput required>
       <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

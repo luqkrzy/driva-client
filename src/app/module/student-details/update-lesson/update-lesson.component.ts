@@ -17,6 +17,7 @@ export class UpdateLessonComponent implements OnInit {
   hoursCount = [...Array.from({length: 5}, (_, i) => i + 1)];
   lessonForm: FormGroup = new FormGroup({});
   displayedColumns: string[] = ['id', 'data', 'start', 'koniec', 'instruktor'];
+  todayDate = new Date();
 
   constructor(private fb: FormBuilder,
     private lessonsService: LessonsService,
