@@ -3,6 +3,7 @@ import { IProduct } from '../../../model/product';
 import { SwitchProductService } from '../switch-product.service';
 import { LessonsService } from '../../lessons/lessons.service';
 import { IGeneralLesson } from '../../../model/lesson';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-student-lessons',
@@ -14,14 +15,14 @@ export class StudentLessonsComponent implements OnInit {
   columns = ['lessonId', 'date', 'timeStart', 'hoursCount', 'instructorFistName', 'instructorLastName', 'instructorEmail', 'instructorPhoneNumber', 'edit'];
   displayedColumns = ['id', 'data', 'start', 'l. godz', 'i. imię', 'i. naz.', 'i email', 'i. tel.', '',];
   product: IProduct;
-  lessons: IGeneralLesson[] = [];
-
+  lessons = new MatTableDataSource<IGeneralLesson>();
   constructor(
     private switchProductService: SwitchProductService,
     private lessonsService: LessonsService) {
   }
 
   ngOnInit(): void {
+    this.isLoading = false;
     this.switchProduct();
   }
 
@@ -29,9 +30,20 @@ export class StudentLessonsComponent implements OnInit {
     console.log(row);
   }
 
+  private switchProduct(): void {
+    this.isLoading = true;
+    this.switchProductService.product$.subscribe(product => {
+      this.product = product;
+      if (product.id) {
+        this.getLessons(product.id!);
+      }
+    });
+    this.isLoading = false;
+  }
+
   private getLessons(id: number): void {
     this.lessonsService.getLessonsByProductId(id).subscribe(data => {
-      this.lessons = data;
+      this.lessons.data = data;
       this.isLoading = false;
     });
   }
@@ -45,18 +57,5 @@ export class StudentLessonsComponent implements OnInit {
   }
 
   deleteLesson(lesson: IGeneralLesson) {
-  }
-
-  private switchProduct(): void {
-    this.switchProductService.product$.subscribe(product => {
-      this.product = product;
-      if (product.id) {
-        this.getLessons(product.id!);
-      } else {
-        this.lessons = [];
-      }
-
-      this.isLoading = false;
-    });
   }
 }

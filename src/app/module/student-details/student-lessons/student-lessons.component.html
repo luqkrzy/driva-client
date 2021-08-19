@@ -7,7 +7,7 @@
     </button>
   </div>
 </mat-card-title>
-<ng-container *ngIf="product.id">
+<ng-container *ngIf="product?.id">
   <mat-table [dataSource]="lessons">
     <ng-container *ngFor="let column of columns; index as i">
       <ng-container [matColumnDef]="column">

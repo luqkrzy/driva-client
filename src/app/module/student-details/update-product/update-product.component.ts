@@ -59,7 +59,6 @@ export class UpdateProductComponent implements OnInit {
 
   onConfirm(): void {
     const product: IProduct = this.productForm.value;
-    console.log(product);
     this.dialogRef.close(product);
   }
 

@@ -7,7 +7,7 @@
     <table [dataSource]="products" class="w-full" mat-table>
       <ng-container matColumnDef="id">
         <th *matHeaderCellDef mat-header-cell> Id</th>
-        <td *matCellDef="let element" mat-cell> {{element.id}} </td>
+        <td *matCellDef="let prod" mat-cell> {{prod.id!}} </td>
       </ng-container>
 
       <ng-container matColumnDef="productTypeCategory">
@@ -48,14 +48,11 @@
       <ng-container matColumnDef="edit">
         <th *matHeaderCellDef mat-header-cell></th>
         <td *matCellDef="let prod" mat-cell>
-          <mat-icon (click)="editProduct(prod)" color="primary">edit</mat-icon>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="del">
-        <th *matHeaderCellDef mat-header-cell></th>
-        <td *matCellDef="let prod" mat-cell>
-          <mat-icon (click)="deleteProduct(prod.id)" color="warn">delete</mat-icon>
+          <mat-icon [matMenuTriggerFor]="menu" class="cursor-pointer">more_vert</mat-icon>
+          <mat-menu #menu="matMenu" xPosition="before">
+            <button (click)="editProduct(prod)" mat-menu-item>Edytuj</button>
+            <button (click)="deleteProduct(prod.id)" mat-menu-item>Usuń</button>
+          </mat-menu>
         </td>
       </ng-container>
 

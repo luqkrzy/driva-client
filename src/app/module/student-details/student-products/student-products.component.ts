@@ -17,7 +17,7 @@ import { AddProductComponent } from '../add-product/add-product.component';
 })
 export class StudentProductsComponent implements OnInit {
   isLoading: boolean = true;
-  displayedColumns: string[] = ['id', 'productTypeCategory', 'productTypeName', 'hoursLeft', 'bookOnline', 'isPaid', 'price', 'productTypeBasePrice', 'edit', 'del'];
+  displayedColumns: string[] = ['id', 'productTypeCategory', 'productTypeName', 'hoursLeft', 'bookOnline', 'isPaid', 'price', 'productTypeBasePrice', 'edit'];
   products = new MatTableDataSource<IProduct>();
   product: IProduct;
   private studentId: number;
@@ -90,14 +90,14 @@ export class StudentProductsComponent implements OnInit {
     this.dialogConfig.data = id;
     const dialogRef = this.dialog.open(DeleteDialogComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe(id => {
-	    if (id) {
-		    this.productService.deleteProduct(id).subscribe(resp => {
-			    if (resp.status === 204) {
-				    this.products.data = this.products.data.filter(p => p.id !== id);
-				    this.snackBar.open('Usunięto', 'OK', this.matSnackBarConfig);
-			    }
-		    });
-	    }
+      if (id) {
+        this.productService.deleteProduct(id).subscribe(resp => {
+          if (resp.status === 204) {
+            this.products.data = this.products.data.filter(p => p.id !== id);
+            this.snackBar.open('Usunięto', 'OK', this.matSnackBarConfig);
+          }
+        });
+      }
     });
   }
 }
