@@ -9,11 +9,15 @@ driving school. Main design assumptions are based on use case diagrams and a sim
 * Angular Material
 * Tailwindcss
 
+Backend api repo of the app in spring boot [here](https://github.com/luqkrzy/driva-api)
+
 ![](pic/system.jpg)
 Scheme of the system functioning
 
 ![](pic/class-diagram.jpg)
 Class diagram
 
-Backend api repo of the app in spring boot [here](https://github.com/luqkrzy/driva-api)
+![](pic/admin-diagram.jpg)
+
+Admin diagram
 
