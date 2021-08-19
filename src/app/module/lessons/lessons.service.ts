@@ -32,6 +32,15 @@ export class LessonsService implements OnInit {
     return this.http.post<ILesson>(this.url, lesson);
   }
 
+  deleteLesson(id: number) {
+    return this.http.delete(`${this.url}/${id}`, {observe: 'response'})
+      .pipe(shareReplay(1));
+  }
+
+  updateLesson(lesson: ILesson): Observable<ILesson> {
+    return this.http.patch<ILesson>(`${this.url}/${lesson.id}`, lesson);
+  }
+
   createGeneralLesson(lesson: IGeneralLesson): Observable<IGeneralLesson> {
     return this.http.post<IGeneralLesson>(this.url, lesson);
   }

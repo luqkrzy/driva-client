@@ -9,6 +9,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { UpdateProductComponent } from '../update-product/update-product.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { AddProductComponent } from '../add-product/add-product.component';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-products',
@@ -91,7 +92,7 @@ export class StudentProductsComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteDialogComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe(id => {
       if (id) {
-        this.productService.deleteProduct(id).subscribe(resp => {
+        this.productService.deleteProduct(id).subscribe((resp: HttpResponse<any>) => {
           if (resp.status === 204) {
             this.products.data = this.products.data.filter(p => p.id !== id);
             this.snackBar.open('Usunięto', 'OK', this.matSnackBarConfig);

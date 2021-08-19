@@ -17,8 +17,8 @@
           <mat-cell *matCellDef="let lesson">
             <mat-icon [matMenuTriggerFor]="menu" class="cursor-pointer">more_vert</mat-icon>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button (click)="editLesson(lesson)" mat-menu-item>Edytuj</button>
-              <button (click)="deleteLesson(lesson)" mat-menu-item>Usuń</button>
+              <button (click)="updateLesson(lesson)" mat-menu-item>Edytuj</button>
+              <button (click)="deleteLesson(lesson.id)" mat-menu-item>Usuń</button>
             </mat-menu>
           </mat-cell>
         </ng-container>

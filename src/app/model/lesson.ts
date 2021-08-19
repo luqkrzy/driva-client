@@ -1,13 +1,14 @@
 export interface ILesson {
   id: number;
-  productId?: number;
-  date?: string;
-  timeStart?: number;
-  hoursCount?: number;
-  instructorId?: number;
-  instructorFullName?: string;
-  instructorEmail?: string;
-  instructorPhone?: string;
+  productId: number;
+  date: string;
+  timeStart: number;
+  hoursCount: number;
+  instructorId: number;
+  instructorFistName: string;
+  instructorLastName: string;
+  instructorEmail: string;
+  instructorPhone: string;
 }
 
 export interface IGeneralLesson {

@@ -41,10 +41,10 @@ export class AddLessonComponent implements OnInit {
   }
 
   onConfirm(): void {
-    const date = this.lessonForm.value.date.toISOString().slice(0, 10);
+    this.date.value.setHours(10);
+    const date = this.date.value.toISOString().slice(0, 10);
     const newLesson: ILesson = this.lessonForm.value;
     newLesson.date = date;
-    console.log(newLesson);
     this.dialogRef.close(newLesson);
   }
 

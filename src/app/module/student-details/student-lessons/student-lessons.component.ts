@@ -7,6 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { AddLessonComponent } from '../add-lesson/add-lesson.component';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { HttpResponse } from '@angular/common/http';
+import { UpdateLessonComponent } from '../update-lesson/update-lesson.component';
 
 @Component({
   selector: 'app-student-lessons',
@@ -49,7 +52,6 @@ export class StudentLessonsComponent implements OnInit {
       dialogRef.afterClosed().subscribe((lesson: ILesson) => {
         if (lesson) {
           this.lessonsService.createLesson(lesson).subscribe((result: ILesson) => {
-            console.log(result);
             this.lessons.data.push(result);
             this.lessons.data = this.lessons.data;
             this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
@@ -77,11 +79,43 @@ export class StudentLessonsComponent implements OnInit {
     this.isLoading = false;
   }
 
-  editLesson(lesson: ILesson) {
-    console.log('edit lesson');
+  updateLesson(lesson: ILesson) {
+    this.dialogConfig.data = lesson;
+    const dialogRef = this.dialog.open(UpdateLessonComponent, this.dialogConfig);
+    dialogRef.afterClosed().subscribe((updatedLesson: ILesson) => {
+      if (updatedLesson) {
+        this.lessonsService.updateLesson(updatedLesson).subscribe((lesson: ILesson) => {
+          if (lesson.id) {
+            this.lessons.data.filter(l => l.id === lesson.id).map(l => {
+              l.id = lesson.id;
+              l.date = lesson.date;
+              l.timeStart = lesson.timeStart;
+              l.hoursCount = lesson.hoursCount;
+              l.instructorFistName = lesson.instructorFistName;
+              l.instructorLastName = lesson.instructorLastName;
+              l.instructorEmail = lesson.instructorEmail;
+              l.instructorPhone = lesson.instructorPhone;
+            });
+          }
+          this.snackBar.open('Zaktualizowano', 'OK', this.matSnackBarConfig);
+        });
+      }
+    });
   }
 
-  deleteLesson(lesson: ILesson) {
+  deleteLesson(id: number) {
+    this.dialogConfig.data = id;
+    const dialogRef = this.dialog.open(DeleteDialogComponent, this.dialogConfig);
+    dialogRef.afterClosed().subscribe((id: number) => {
+      if (id) {
+        this.lessonsService.deleteLesson(id).subscribe((resp: HttpResponse<any>) => {
+          if (resp.status === 204) {
+            this.lessons.data = this.lessons.data.filter(p => p.id !== id);
+            this.snackBar.open('Usunięto', 'OK', this.matSnackBarConfig);
+          }
+        });
+      }
+    });
   }
 
   private switchButton() {
