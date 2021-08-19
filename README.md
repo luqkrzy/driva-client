@@ -21,3 +21,4 @@ Class diagram
 
 Admin diagram
 
+s

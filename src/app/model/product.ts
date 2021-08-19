@@ -1,5 +1,5 @@
 export interface IProduct {
-  id: number;
+  id: number | null;
   studentId: number;
   studentFullName: string;
   hoursLeft: number;

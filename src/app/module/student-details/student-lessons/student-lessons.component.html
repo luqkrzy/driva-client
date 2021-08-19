@@ -1,7 +1,8 @@
 <mat-card-title>
   <div class="flex justify-between">
     <div>Lekcje</div>
-    <button (click)="addLessonDialog()" class="float-right" color="primary" mat-raised-button>
+    <button (click)="addLessonDialog()" [disabled]="switchAddButton" class="float-right" color="primary"
+            mat-raised-button>
       <mat-icon aria-hidden="false" aria-label="icon">add</mat-icon>
       Dodaj
     </button>

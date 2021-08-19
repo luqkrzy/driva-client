@@ -6,13 +6,19 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class SwitchProductService {
-  private dataSource = new Subject<IProduct>();
-  product$ = this.dataSource.asObservable();
+  private productSource = new Subject<IProduct>();
+  product$ = this.productSource.asObservable();
+  private buttonSource = new Subject<boolean>();
+  buttons$ = this.buttonSource.asObservable();
 
   constructor() {
   }
 
   switchProduct(product: IProduct): void {
-    this.dataSource.next(product);
+    this.productSource.next(product);
+  }
+
+  switchButton(state: boolean): void {
+    this.buttonSource.next(state);
   }
 }

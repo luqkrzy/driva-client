@@ -95,6 +95,11 @@ export class StudentProductsComponent implements OnInit {
           if (resp.status === 204) {
             this.products.data = this.products.data.filter(p => p.id !== id);
             this.snackBar.open('Usunięto', 'OK', this.matSnackBarConfig);
+            this.product.id = null;
+            this.switchProductService.switchProduct(this.product);
+            if (this.products.data.length === 0) {
+              this.switchProductService.switchButton(true);
+            }
           }
         });
       }

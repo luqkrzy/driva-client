@@ -1,1 +1,38 @@
-<p>add-lesson works!</p>
+<mat-dialog-content>
+  <form [formGroup]="lessonForm">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Instruktor</mat-label>
+      <mat-select formControlName="instructorId" required>
+        <mat-option *ngFor="let instructor of instructors" [value]="instructor.id">
+          {{instructor.firstName}} {{instructor.lastName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Data</mat-label>
+      <input [formControl]="date" [matDatepicker]="picker" formControlName="date" matInput required>
+      <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Godzina</mat-label>
+      <mat-select formControlName="timeStart" required>
+        <mat-option *ngFor="let hour of hours" [value]="hour">
+          {{hour}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Liczba godzin</mat-label>
+      <mat-select formControlName="hoursCount" required>
+        <mat-option *ngFor="let hour of hoursCount" [value]="hour">
+          {{hour}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="float-right">
+  <button (click)="onClose()" mat-raised-button>anuluj</button>
+  <button (click)="onConfirm()" [disabled]="validateForm()" color="primary" mat-raised-button>OK</button>
+</mat-dialog-actions>
