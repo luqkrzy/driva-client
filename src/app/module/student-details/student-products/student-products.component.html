@@ -60,7 +60,8 @@
       </ng-container>
 
       <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-      <tr (click)="onClick(row)" *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      <tr (click)="onClick(row)" *matRowDef="let row; columns: displayedColumns;" class="hover:bg-indigo-100"
+          mat-row></tr>
     </table>
 
 

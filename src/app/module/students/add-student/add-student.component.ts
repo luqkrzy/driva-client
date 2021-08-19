@@ -1,11 +1,14 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Constant } from '../../../shared/constant';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IStudent } from '../../../model/student';
 import { IProduct } from '../../../model/product';
 import { IProductType } from '../../../model/product-type';
 import { ProductTypeService } from '../../product-type/product-type.service';
+import { Observable, of } from 'rxjs';
+import { delay, map, switchMap } from 'rxjs/operators';
+import { StudentService } from '../student.service';
 
 @Component({
   selector: 'app-add-student',
@@ -20,7 +23,8 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddStudentComponent>,
-    private productTypeService: ProductTypeService,) {
+    private productTypeService: ProductTypeService,
+    private studentService: StudentService) {
   }
 
   onClose(): void {
@@ -51,41 +55,6 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private initStudentForm(): void {
-    this.newStudentForm = this.fb.group({
-      firstName: [
-        'Luk',
-        [Validators.minLength(3),
-         Validators.required,
-         Validators.pattern(Constant.NAME_REGEX)]],
-      lastName: [
-        'Krzy',
-        [Validators.minLength(3),
-         Validators.required,
-         Validators.pattern(Constant.NAME_REGEX)]],
-      email: [
-        'luq@wp.pl',
-        [Validators.pattern(Constant.EMAIL_REGEX), Validators.required]],
-      phoneNumber: [
-        '123456789',
-        [Validators.pattern(Constant.PHONE_REGEX), Validators.required]],
-    },);
-  }
-
-  private initProductForm(): void {
-    this.newProductForm = this.fb.group({
-      productTypeId: [{value: null, disabled: true}, Validators.required],
-      // hoursLeft: [{value: 50, disabled: true}, [
-      //   Validators.required,
-      //   Validators.min(1),
-      //   Validators.max(2000),
-      //   Validators.pattern(Constant.NUMBER_ONLY_REGEX),]],
-      bookOnline: [{value: false, disabled: true}],
-      isPaid: [{value: false, disabled: true}],
-      price: [{value: 0, disabled: true}, [Validators.min(0), Validators.max(20000)]],
-    });
-  }
-
   get firstName(): AbstractControl {
     return this.newStudentForm.get('firstName') as AbstractControl;
   }
@@ -102,9 +71,6 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
     return this.newStudentForm.get('phoneNumber') as AbstractControl;
   }
 
-  // get hoursLeft(): AbstractControl {
-  //   return this.newProductForm.get('hoursLeft') as AbstractControl;
-  // }
   get price(): AbstractControl {
     return this.newProductForm.get('price') as AbstractControl;
   }
@@ -113,11 +79,56 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
     this.initStudentForm();
     this.initProductForm();
     this.productTypeService.getAllProductTypes().subscribe(data => {
-      this.productTypes = data;
+        this.productTypes = data;
       }
     );
   }
 
+  switchPrice(price: number) {
+    this.price.setValue(price);
+  }
+
+  private initProductForm(): void {
+    this.newProductForm = this.fb.group({
+      productTypeId: [{value: null, disabled: true}, Validators.required],
+      bookOnline: [{value: false, disabled: true}],
+      isPaid: [{value: false, disabled: true}],
+      price: [{value: 0, disabled: true}, [Validators.min(0), Validators.max(20000)]],
+    });
+  }
+
+  private initStudentForm(): void {
+    this.newStudentForm = this.fb.group({
+      firstName: [
+        'Luk',
+        [Validators.minLength(3),
+         Validators.required,
+         Validators.pattern(Constant.NAME_REGEX)]],
+      lastName: [
+        'Krzy',
+        [Validators.minLength(3),
+         Validators.required,
+         Validators.pattern(Constant.NAME_REGEX)]],
+      email: [
+        'luq@wp.pl',
+        [Validators.pattern(Constant.EMAIL_REGEX), Validators.required], [this.emailExistsValidator()]],
+      phoneNumber: [
+        '123456789',
+        [Validators.pattern(Constant.PHONE_REGEX), Validators.required]],
+    },);
+  }
+
   ngAfterViewInit(): void {
+  }
+
+  private emailExistsValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return of(control.value).pipe(
+        delay(500),
+        switchMap((email) => this.studentService.doesEmailExist(email).pipe(
+          map(emailExists => emailExists ? {emailExists: true} : null)
+        ))
+      );
+    };
   }
 }

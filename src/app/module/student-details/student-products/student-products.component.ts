@@ -90,12 +90,14 @@ export class StudentProductsComponent implements OnInit {
     this.dialogConfig.data = id;
     const dialogRef = this.dialog.open(DeleteDialogComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe(id => {
-      this.productService.deleteProduct(id).subscribe(resp => {
-        if (resp.status === 204) {
-          this.products.data = this.products.data.filter(p => p.id !== id);
-          this.snackBar.open('Usunięto', 'OK', this.matSnackBarConfig);
-        }
-      });
+	    if (id) {
+		    this.productService.deleteProduct(id).subscribe(resp => {
+			    if (resp.status === 204) {
+				    this.products.data = this.products.data.filter(p => p.id !== id);
+				    this.snackBar.open('Usunięto', 'OK', this.matSnackBarConfig);
+			    }
+		    });
+	    }
     });
   }
 }

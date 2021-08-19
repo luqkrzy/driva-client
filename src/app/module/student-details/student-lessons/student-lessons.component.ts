@@ -11,7 +11,8 @@ import { IGeneralLesson } from '../../../model/lesson';
 })
 export class StudentLessonsComponent implements OnInit {
   isLoading: boolean = true;
-  displayedColumns: string[] = ['id', 'data', 'start', 'koniec', 'instruktor'];
+  columns = ['lessonId', 'date', 'timeStart', 'hoursCount', 'instructorFistName', 'instructorLastName', 'instructorEmail', 'instructorPhoneNumber', 'edit'];
+  displayedColumns = ['id', 'data', 'start', 'l. godz', 'i. imię', 'i. naz.', 'i email', 'i. tel.', '',];
   product: IProduct;
   lessons: IGeneralLesson[] = [];
 
@@ -24,19 +25,37 @@ export class StudentLessonsComponent implements OnInit {
     this.switchProduct();
   }
 
-  private switchProduct(): void {
-    this.switchProductService.product$.subscribe(product => {
-      this.product = product;
-      if (product.id) {
-        this.getLessons(product.id!);
-      }
-      this.isLoading = false;
-    });
+  onRowClicked(row: IGeneralLesson) {
+    console.log(row);
   }
 
   private getLessons(id: number): void {
     this.lessonsService.getLessonsByProductId(id).subscribe(data => {
       this.lessons = data;
+      this.isLoading = false;
+    });
+  }
+
+  addLessonDialog() {
+    console.log('add');
+  }
+
+  editLesson(lesson: IGeneralLesson) {
+    console.log('edit lesson');
+  }
+
+  deleteLesson(lesson: IGeneralLesson) {
+  }
+
+  private switchProduct(): void {
+    this.switchProductService.product$.subscribe(product => {
+      this.product = product;
+      if (product.id) {
+        this.getLessons(product.id!);
+      } else {
+        this.lessons = [];
+      }
+
       this.isLoading = false;
     });
   }

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { IProduct, Product } from '../../model/product';
-import { BehaviorSubject } from 'rxjs';
+import { IProduct } from '../../model/product';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SwitchProductService {
-  private dataSource = new BehaviorSubject<IProduct>(new Product());
+  private dataSource = new Subject<IProduct>();
   product$ = this.dataSource.asObservable();
 
   constructor() {

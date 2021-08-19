@@ -24,6 +24,9 @@
     <mat-form-field class="w-full">
       <mat-label>Email</mat-label>
       <input formControlName="email" matInput required type="email">
+      <mat-error *ngIf="email?.hasError('emailExists')">
+        podany email jest zajęty
+      </mat-error>
       <mat-error *ngIf="email?.hasError('pattern')">
         niepoprawny adres email
       </mat-error>
@@ -44,9 +47,11 @@
       <mat-label>Kategoria</mat-label>
       <mat-select formControlName="productTypeId" required>
         <mat-option *ngFor="let pt of productTypes" [value]="pt.id">
-          <span class="font-bold">Kat. {{pt.productCategory}}</span>
-          - {{pt.name}}, godzin {{pt.lessonsHours}}, {{pt.description | slice:0:30}},
-          cena bazowa: <span class="font-bold">{{pt.basePrice}}zł</span>
+          <div (click)="switchPrice(pt.basePrice!)">
+            <span class="font-bold">Kat. {{pt.productCategory}}</span>
+            - {{pt.name}}, godzin {{pt.lessonsHours}}, {{pt.description | slice:0:30}},
+            cena bazowa: <span class="font-bold">{{pt.basePrice}}zł</span>
+          </div>
         </mat-option>
       </mat-select>
     </mat-form-field>

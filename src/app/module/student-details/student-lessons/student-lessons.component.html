@@ -1,10 +1,33 @@
-<mat-card-header>
-  <mat-card-title>
-    Lekcje
-  </mat-card-title>
-</mat-card-header>
+<mat-card-title>
+  <div class="flex justify-between">
+    <div>Lekcje</div>
+    <button (click)="addLessonDialog()" class="float-right" color="primary" mat-raised-button>
+      <mat-icon aria-hidden="false" aria-label="icon">add</mat-icon>
+      Dodaj
+    </button>
+  </div>
+</mat-card-title>
 <ng-container *ngIf="product.id">
-  {{lessons | json}}
-
+  <mat-table [dataSource]="lessons">
+    <ng-container *ngFor="let column of columns; index as i">
+      <ng-container [matColumnDef]="column">
+        <mat-header-cell *matHeaderCellDef>{{displayedColumns[i]}}</mat-header-cell>
+        <ng-container *ngIf="column == 'edit'; else temp">
+          <mat-cell *matCellDef="let lesson">
+            <mat-icon [matMenuTriggerFor]="menu" class="cursor-pointer">more_vert</mat-icon>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button (click)="editLesson(lesson)" mat-menu-item>Edytuj</button>
+              <button (click)="deleteLesson(lesson)" mat-menu-item>Usuń</button>
+            </mat-menu>
+          </mat-cell>
+        </ng-container>
+        <ng-template #temp>
+          <mat-cell *matCellDef="let lesson">{{lesson[column]}}</mat-cell>
+        </ng-template>
+      </ng-container>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columns" class="hover:bg-indigo-100"></mat-row>
+  </mat-table>
 </ng-container>
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
