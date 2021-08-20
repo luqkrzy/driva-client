@@ -23,9 +23,18 @@ export class InstructorService {
       .pipe(shareReplay(1));
   }
 
+  updateInstructor(id: number, instructor: iInstructor): Observable<iInstructor> {
+    return this.http.patch<iInstructor>(`${this.url}/${id}`, instructor)
+      .pipe(shareReplay(1));
+  }
+
   getAllInstructors(): Observable<iInstructor[]> {
     return this.http.get<iInstructor[]>(this.url).pipe(
       shareReplay(),
     );
+  }
+
+  doesEmailExist(email: string): Observable<Boolean> {
+    return this.http.get<Boolean>(`${this.url}/exist/${email}`);
   }
 }

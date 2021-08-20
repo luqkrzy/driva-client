@@ -4,6 +4,7 @@ import { InstructorsRoutingModule } from './instructors-routing.module';
 import { InstructorsComponent } from './instructors.component';
 import { MaterialModule } from '../../shared/material/material.module';
 import { AddInstructorComponent } from './add-instructor/add-instructor.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { AddInstructorComponent } from './add-instructor/add-instructor.componen
     CommonModule,
     InstructorsRoutingModule,
     MaterialModule,
+    ReactiveFormsModule,
   ]
 })
 export class InstructorsModule {

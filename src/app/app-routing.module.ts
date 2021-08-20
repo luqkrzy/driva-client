@@ -20,7 +20,7 @@ const routes: Routes = [
     path: 'students/:id', loadChildren: () => import('./module/student-details/student-details.module').then(m => m.StudentDetailsModule),
     resolve: {student: StudentResolver}
   },
-  {path: '**', component: PageNotFoundComponent, pathMatch: 'full'}
+  {path: '**', component: PageNotFoundComponent, pathMatch: 'full'},
 ];
 
 @NgModule({

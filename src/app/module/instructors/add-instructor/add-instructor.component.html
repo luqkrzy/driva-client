@@ -1,5 +1,5 @@
 <mat-dialog-content>
-  <form [formGroup]="newStudentForm">
+  <form [formGroup]="instructorForm">
     <mat-form-field class="w-full">
       <mat-label>Imię</mat-label>
       <input [value]="firstName.value | titlecase" formControlName="firstName" matInput required>
@@ -38,39 +38,6 @@
       </mat-error>
     </mat-form-field>
   </form>
-  <p>
-    <mat-slide-toggle (click)="switch()" color="primary">Dodaj produkt</mat-slide-toggle>
-  </p>
-  <form [formGroup]="newProductForm">
-    <mat-form-field appearance="fill" class="w-full">
-      <mat-label>Kategoria</mat-label>
-      <mat-select formControlName="productTypeId" required>
-        <mat-option *ngFor="let pt of productTypes" [value]="pt.id">
-          <div (click)="switchPrice(pt.basePrice!)">
-            <span class="font-bold">Kat. {{pt.productCategory}}</span>
-            - {{pt.name}}, godzin {{pt.lessonsHours}}, {{pt.description | slice:0:30}},
-            cena bazowa: <span class="font-bold">{{pt.basePrice}}zł</span>
-          </div>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <section class="flex space-x-4">
-      <p>
-        <mat-checkbox color="primary" formControlName="bookOnline">Rezerwacja online</mat-checkbox>
-      </p>
-      <p>
-        <mat-checkbox color="primary" formControlName="isPaid">Zapłacone</mat-checkbox>
-      </p>
-    </section>
-    <mat-form-field appearance="fill" class="w-full">
-      <mat-label>Cena</mat-label>
-      <input formControlName="price" matInput type="number">
-      <span matSuffix>PLN</span>
-      <mat-error *ngIf="price?.hasError('max')">
-        cena jest jest za wysoka
-      </mat-error>
-    </mat-form-field>
-  </form>
 </mat-dialog-content>
 <mat-dialog-actions class="float-right">
   <button (click)="onClose()" mat-button>Anuluj</button>
@@ -78,4 +45,3 @@
     Dodaj
   </button>
 </mat-dialog-actions>
-

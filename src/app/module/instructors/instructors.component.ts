@@ -66,6 +66,12 @@ export class InstructorsComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((instructor: iInstructor) => {
       if (instructor) {
         this.saveInstructor(instructor);
+        this.instructorService.createInstructor(instructor).subscribe((result: iInstructor) => {
+          if (result) {
+            this.dataSource.data.push(result);
+            this.dataSource.data = this.dataSource.data;
+          }
+        });
       }
     });
   }
