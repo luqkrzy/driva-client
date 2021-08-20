@@ -12,8 +12,8 @@
       </ng-container>
       <ng-template #loggedIn>
         <a *ngIf="hasAuthority(lvl3)" mat-list-item routerLink="calendar" routerLinkActive="active">Kalendarz</a>
-        <a *ngIf="hasAuthority(lvl2)" mat-list-item routerLink="products" routerLinkActive="active">Produkty</a>
         <a *ngIf="hasAuthority(lvl2)" mat-list-item routerLink="students" routerLinkActive="active">Studenci</a>
+        <a *ngIf="hasAuthority(lvl2)" mat-list-item routerLink="instructors" routerLinkActive="active">Instruktorzy</a>
       </ng-template>
     </mat-nav-list>
   </mat-sidenav>

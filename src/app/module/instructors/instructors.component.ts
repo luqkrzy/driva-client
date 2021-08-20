@@ -1,4 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { InstructorService } from './instructor.service';
+import { iInstructor } from '../../model/instructor';
+import { AddStudentComponent } from '../students/add-student/add-student.component';
 
 @Component({
   selector: 'app-instructors',
@@ -6,9 +15,76 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./instructors.component.scss']
 })
 export class InstructorsComponent implements OnInit {
-  constructor() {
+  isLoadingResults = true;
+  readonly columns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber', 'edit'];
+  readonly displayedColumns = ['id', 'Imię', 'Nazwisko', 'Email', 'Tel.', ''];
+  dataSource = new MatTableDataSource<iInstructor>();
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<any>;
+  private dialogConfig: MatDialogConfig = new MatDialogConfig();
+  private matSnackBarConfig: MatSnackBarConfig = new MatSnackBarConfig();
+
+  constructor(private instructorService: InstructorService,
+    private router: Router,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,) {
   }
 
   ngOnInit(): void {
+    this.dialogConfig.width = '800px';
+    this.matSnackBarConfig.duration = 5000;
+  }
+
+  applyFilter(filterValue: any): void {
+    let value = filterValue.target.value;
+    this.dataSource.filter = value.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.instructorService.getAllInstructors().subscribe((data: iInstructor[]) => {
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.isLoadingResults = false;
+      },
+      () => {
+        this.isLoadingResults = false;
+      }
+    );
+  }
+
+  onClick(row: iInstructor): void {
+    console.log(row);
+  }
+
+  openAddInstructorDialog(): void {
+    const dialogRef = this.dialog.open(AddStudentComponent, this.dialogConfig);
+    dialogRef.afterClosed().subscribe((student: iInstructor) => {
+      if (student) {
+        this.saveStudent(student);
+      }
+    });
+  }
+
+  updateInstructor(instructor: iInstructor) {
+  }
+
+  deleteInstructor(id: number) {
+  }
+
+  private saveStudent(student: iInstructor): void {
+    this.instructorService.createInstructor(student).subscribe((result: iInstructor) => {
+        this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
+        this.dataSource.data.push(result);
+        this.dataSource.data = this.dataSource.data;
+      },
+      () => {
+        this.isLoadingResults = false;
+      }
+    );
   }
 }

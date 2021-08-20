@@ -3,10 +3,6 @@ th {
   font-weight: bold;
 }
 
-td, th {
-  width: 25%;
-}
-
 tr:hover {
   color: #3F57B5;
   background-color: #C2C7E6;
@@ -21,4 +17,9 @@ tr:hover {
 
 .mat-column-firstName {
   padding-left: 16px;
+}
+
+
+.demo-table {
+  width: 100%;
 }

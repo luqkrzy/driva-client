@@ -20,5 +20,3 @@ Class diagram
 ![](pic/admin-diagram.jpg)
 
 Admin diagram
-
-s

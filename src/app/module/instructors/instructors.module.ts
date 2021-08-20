@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InstructorsRoutingModule } from './instructors-routing.module';
 import { InstructorsComponent } from './instructors.component';
+import { MaterialModule } from '../../shared/material/material.module';
 
 @NgModule({
   declarations: [
@@ -9,7 +10,8 @@ import { InstructorsComponent } from './instructors.component';
   ],
   imports: [
     CommonModule,
-    InstructorsRoutingModule
+    InstructorsRoutingModule,
+    MaterialModule,
   ]
 })
 export class InstructorsModule {

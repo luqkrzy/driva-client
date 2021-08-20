@@ -1,1 +1,41 @@
-<p>instructors works!</p>
+<div class="p-12">
+  <div class="mat-typography" fxLayoutAlign="space-between center">
+    <h1>Instruktorzy</h1>
+    <button (click)="openAddInstructorDialog()" color="primary" mat-raised-button>
+      <mat-icon aria-hidden="false" aria-label="icon">add</mat-icon>
+      Dodaj
+    </button>
+  </div>
+  <mat-form-field class="w-full">
+    <input (keyup)="applyFilter($event)" matInput placeholder="szukaj">
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" class="" matSort>
+      <ng-container *ngFor="let column of columns; index as i">
+        <ng-container [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{displayedColumns[i]}}</mat-header-cell>
+          <ng-container *ngIf="column == 'edit'; else temp">
+            <mat-cell *matCellDef="let instructor">
+              <mat-icon [matMenuTriggerFor]="menu" class="cursor-pointer">more_vert</mat-icon>
+              <mat-menu #menu="matMenu" xPosition="before">
+                <button (click)="updateInstructor(instructor)" mat-menu-item>Edytuj</button>
+                <button (click)="deleteInstructor(instructor.id)" mat-menu-item>Usuń</button>
+              </mat-menu>
+            </mat-cell>
+          </ng-container>
+          <ng-template #temp>
+            <mat-cell *matCellDef="let lesson">{{lesson[column]}}</mat-cell>
+          </ng-template>
+        </ng-container>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+      <mat-row (click)="onClick(row)" *matRowDef="let row; columns: columns;" class="row-hover">
+      </mat-row>
+      <tr *matNoDataRow class="mat-row">
+        <td class="mat-cell" colspan="4">nie znaleziono</td>
+      </tr>
+    </mat-table>
+    <mat-progress-bar *ngIf="isLoadingResults" mode="indeterminate"></mat-progress-bar>
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
+  </div>
+</div>
