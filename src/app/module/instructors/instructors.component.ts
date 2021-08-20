@@ -60,6 +60,7 @@ export class InstructorsComponent implements OnInit, AfterViewInit {
   }
 
   onClick(row: iInstructor): void {
+    console.log(row);
   }
 
   openAddInstructorDialog(): void {
@@ -74,6 +75,21 @@ export class InstructorsComponent implements OnInit, AfterViewInit {
   updateInstructor(instructor: iInstructor) {
     this.dialogConfig.data = instructor;
     const dialogRef = this.dialog.open(UpdateInstructorComponent, this.dialogConfig);
+    dialogRef.afterClosed().subscribe((data: iInstructor) => {
+      if (data) {
+        this.instructorService.updateInstructor(data.id as number, data).subscribe((instructor: iInstructor) => {
+          if (instructor.id) {
+            this.dataSource.data.filter(i => i.id === data.id).map(i => {
+              i.firstName = data.firstName;
+              i.lastName = data.lastName;
+              i.email = data.email;
+              i.phoneNumber = data.phoneNumber;
+            });
+            this.snackBar.open("Zaktualizowano", 'OK', this.matSnackBarConfig);
+          }
+        });
+      }
+    });
   }
 
   deleteInstructor(id: number) {

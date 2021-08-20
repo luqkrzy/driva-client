@@ -3,7 +3,6 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { IStudent } from '../../../model/student';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Constant } from '../../../shared/constant';
-import { StudentService } from '../../students/student.service';
 
 @Component({
   selector: 'app-update-student-account',
@@ -16,7 +15,7 @@ export class UpdateStudentAccountComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<UpdateStudentAccountComponent>,
     @Inject(MAT_DIALOG_DATA) private student: IStudent,
-    private studentService: StudentService) {
+  ) {
   }
 
   get firstName(): AbstractControl {

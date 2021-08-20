@@ -1,0 +1,47 @@
+<mat-dialog-content>
+  <form [formGroup]="instructorForm">
+    <mat-form-field class="w-full">
+      <mat-label>Imię</mat-label>
+      <input [value]="firstName.value | titlecase" formControlName="firstName" matInput required>
+      <mat-error *ngIf="firstName?.hasError('minlength')">
+        imię musi zawierać minimum {{firstName.errors?.minlength.requiredLength}} litery
+      </mat-error>
+      <mat-error *ngIf="firstName?.hasError('pattern')">
+        imię może zwierać tylko litery
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Nazwisko</mat-label>
+      <input [value]="lastName.value | titlecase" formControlName="lastName" matInput required>
+      <mat-error *ngIf="lastName?.hasError('minlength')">
+        nazwisko musi zawierać minimum {{lastName.errors?.minlength.requiredLength}} litery
+      </mat-error>
+      <mat-error *ngIf="lastName?.hasError('pattern')">
+        nazwisko może zwierać tylko litery
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput required type="email">
+      <mat-error *ngIf="email?.hasError('emailExists')">
+        podany email jest zajęty
+      </mat-error>
+      <mat-error *ngIf="email?.hasError('pattern')">
+        niepoprawny adres email
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Tel</mat-label>
+      <input formControlName="phoneNumber" matInput required>
+      <mat-error *ngIf="phoneNumber?.hasError('pattern')">
+        niepoprawny telefon, podaj same cyfry
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="float-right">
+  <button (click)="onClose()" mat-button>Anuluj</button>
+  <button (click)="onSave()" [disabled]="validateForm()" color="primary" mat-raised-button type="submit">
+    Dodaj
+  </button>
+</mat-dialog-actions>
