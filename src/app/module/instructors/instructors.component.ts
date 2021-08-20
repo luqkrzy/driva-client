@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { InstructorService } from './instructor.service';
 import { iInstructor } from '../../model/instructor';
 import { AddInstructorComponent } from './add-instructor/add-instructor.component';
+import { DeleteDialogComponent } from '../student-details/delete-dialog/delete-dialog.component';
+import { UpdateInstructorComponent } from './update-instructor/update-instructor.component';
 
 @Component({
   selector: 'app-instructors',
@@ -58,7 +60,6 @@ export class InstructorsComponent implements OnInit, AfterViewInit {
   }
 
   onClick(row: iInstructor): void {
-    console.log(row);
   }
 
   openAddInstructorDialog(): void {
@@ -66,20 +67,28 @@ export class InstructorsComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((instructor: iInstructor) => {
       if (instructor) {
         this.saveInstructor(instructor);
-        this.instructorService.createInstructor(instructor).subscribe((result: iInstructor) => {
-          if (result) {
-            this.dataSource.data.push(result);
-            this.dataSource.data = this.dataSource.data;
-          }
-        });
       }
     });
   }
 
   updateInstructor(instructor: iInstructor) {
+    this.dialogConfig.data = instructor;
+    const dialogRef = this.dialog.open(UpdateInstructorComponent, this.dialogConfig);
   }
 
   deleteInstructor(id: number) {
+    this.dialogConfig.data = id;
+    const dialogRef = this.dialog.open(DeleteDialogComponent, this.dialogConfig);
+    dialogRef.afterClosed().subscribe((id: number) => {
+      if (id) {
+        this.instructorService.deleteInstructor(id).subscribe(resp => {
+          if (resp.status === 204) {
+            this.dataSource.data = this.dataSource.data.filter(p => p.id !== id);
+            this.snackBar.open('Usunięto', 'OK', this.matSnackBarConfig);
+          }
+        });
+      }
+    });
   }
 
   private saveInstructor(instructor: iInstructor): void {

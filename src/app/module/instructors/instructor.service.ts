@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { iInstructor } from '../../model/instructor';
@@ -15,7 +15,8 @@ export class InstructorService {
   }
 
   createInstructor(instructor: iInstructor): Observable<iInstructor> {
-    return this.http.post<iInstructor>(this.url, instructor);
+    return this.http.post<iInstructor>(this.url, instructor)
+      .pipe(shareReplay(1));
   }
 
   getInstructor(id: number): Observable<iInstructor> {
@@ -36,5 +37,10 @@ export class InstructorService {
 
   doesEmailExist(email: string): Observable<Boolean> {
     return this.http.get<Boolean>(`${this.url}/exist/${email}`);
+  }
+
+  deleteInstructor(id: number): Observable<HttpResponse<any>> {
+    return this.http.delete(`${this.url}/${id}`, {observe: 'response'})
+      .pipe(shareReplay(1));
   }
 }

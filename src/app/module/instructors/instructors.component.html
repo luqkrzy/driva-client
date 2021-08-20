@@ -29,7 +29,7 @@
         </ng-container>
       </ng-container>
       <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
-      <mat-row (click)="onClick(row)" *matRowDef="let row; columns: columns;" class="row-hover">
+      <mat-row (click)="onClick(row)" *matRowDef="let row; columns: columns;" class="hover:bg-indigo-100">
       </mat-row>
       <tr *matNoDataRow class="mat-row">
         <td class="mat-cell" colspan="4">nie znaleziono</td>

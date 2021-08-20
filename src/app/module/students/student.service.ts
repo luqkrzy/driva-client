@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IStudent } from '../../model/student';
 import { shareReplay } from 'rxjs/operators';
@@ -32,7 +32,7 @@ export class StudentService {
     return this.http.get<Boolean>(`${this.url}/exist/${email}`);
   }
 
-  deleteStudent(id: number) {
+  deleteStudent(id: number): Observable<HttpResponse<any>> {
     return this.http.delete(`${this.url}/${id}`, {observe: 'response'})
       .pipe(shareReplay(1));
   }

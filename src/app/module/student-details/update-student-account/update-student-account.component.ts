@@ -1,10 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IStudent } from '../../../model/student';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Constant } from '../../../shared/constant';
-import { Observable, of } from 'rxjs';
-import { delay, map, switchMap } from 'rxjs/operators';
 import { StudentService } from '../../students/student.service';
 
 @Component({
@@ -13,7 +11,7 @@ import { StudentService } from '../../students/student.service';
   styleUrls: ['./update-student-account.component.scss']
 })
 export class UpdateStudentAccountComponent implements OnInit {
-  updateAccount: FormGroup = new FormGroup({});
+  studentForm: FormGroup = new FormGroup({});
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<UpdateStudentAccountComponent>,
@@ -22,19 +20,19 @@ export class UpdateStudentAccountComponent implements OnInit {
   }
 
   get firstName(): AbstractControl {
-    return this.updateAccount.get('firstName') as AbstractControl;
+    return this.studentForm.get('firstName') as AbstractControl;
   }
 
   get lastName(): AbstractControl {
-    return this.updateAccount.get('lastName') as AbstractControl;
+    return this.studentForm.get('lastName') as AbstractControl;
   }
 
   get email(): AbstractControl {
-    return this.updateAccount.get('email') as AbstractControl;
+    return this.studentForm.get('email') as AbstractControl;
   }
 
   get phoneNumber(): AbstractControl {
-    return this.updateAccount.get('phoneNumber') as AbstractControl;
+    return this.studentForm.get('phoneNumber') as AbstractControl;
   }
 
   ngOnInit(): void {
@@ -42,7 +40,7 @@ export class UpdateStudentAccountComponent implements OnInit {
   }
 
   onSave() {
-    const updatedAccount: IStudent = this.updateAccount.value;
+    const updatedAccount: IStudent = this.studentForm.value;
     this.dialogRef.close(updatedAccount);
   }
 
@@ -51,7 +49,7 @@ export class UpdateStudentAccountComponent implements OnInit {
   }
 
   private initForm() {
-    this.updateAccount = this.fb.group({
+    this.studentForm = this.fb.group({
       id: [this.student.id],
       firstName: [this.student.firstName,
         [Validators.minLength(2),
@@ -68,16 +66,5 @@ export class UpdateStudentAccountComponent implements OnInit {
         [Validators.pattern(Constant.PHONE_REGEX),
          Validators.required]]
     });
-  }
-
-  private emailExistsValidator(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      return of(control.value).pipe(
-        delay(500),
-        switchMap((email) => this.studentService.doesEmailExist(email).pipe(
-          map(emailExists => emailExists ? {emailExists: true} : null)
-        ))
-      );
-    };
   }
 }

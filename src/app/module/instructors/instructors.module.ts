@@ -5,11 +5,13 @@ import { InstructorsComponent } from './instructors.component';
 import { MaterialModule } from '../../shared/material/material.module';
 import { AddInstructorComponent } from './add-instructor/add-instructor.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UpdateInstructorComponent } from './update-instructor/update-instructor.component';
 
 @NgModule({
   declarations: [
     InstructorsComponent,
-    AddInstructorComponent
+    AddInstructorComponent,
+    UpdateInstructorComponent
   ],
   imports: [
     CommonModule,
