@@ -63,9 +63,9 @@ export class InstructorsComponent implements OnInit {
 
   openAddInstructorDialog(): void {
     const dialogRef = this.dialog.open(AddStudentComponent, this.dialogConfig);
-    dialogRef.afterClosed().subscribe((student: iInstructor) => {
-      if (student) {
-        this.saveStudent(student);
+    dialogRef.afterClosed().subscribe((instructor: iInstructor) => {
+      if (instructor) {
+        this.saveInstructor(instructor);
       }
     });
   }
@@ -76,8 +76,8 @@ export class InstructorsComponent implements OnInit {
   deleteInstructor(id: number) {
   }
 
-  private saveStudent(student: iInstructor): void {
-    this.instructorService.createInstructor(student).subscribe((result: iInstructor) => {
+  private saveInstructor(instructor: iInstructor): void {
+    this.instructorService.createInstructor(instructor).subscribe((result: iInstructor) => {
         this.snackBar.open('Dodano do bazy', 'OK', this.matSnackBarConfig);
         this.dataSource.data.push(result);
         this.dataSource.data = this.dataSource.data;
