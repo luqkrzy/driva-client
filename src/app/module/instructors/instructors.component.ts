@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -7,14 +7,14 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { InstructorService } from './instructor.service';
 import { iInstructor } from '../../model/instructor';
-import { AddStudentComponent } from '../students/add-student/add-student.component';
+import { AddInstructorComponent } from './add-instructor/add-instructor.component';
 
 @Component({
   selector: 'app-instructors',
   templateUrl: './instructors.component.html',
   styleUrls: ['./instructors.component.scss']
 })
-export class InstructorsComponent implements OnInit {
+export class InstructorsComponent implements OnInit, AfterViewInit {
   isLoadingResults = true;
   readonly columns: string[] = ['id', 'firstName', 'lastName', 'email', 'phoneNumber', 'edit'];
   readonly displayedColumns = ['id', 'Imię', 'Nazwisko', 'Email', 'Tel.', ''];
@@ -62,7 +62,7 @@ export class InstructorsComponent implements OnInit {
   }
 
   openAddInstructorDialog(): void {
-    const dialogRef = this.dialog.open(AddStudentComponent, this.dialogConfig);
+    const dialogRef = this.dialog.open(AddInstructorComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe((instructor: iInstructor) => {
       if (instructor) {
         this.saveInstructor(instructor);
