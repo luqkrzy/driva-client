@@ -64,14 +64,15 @@ export class AddProductTypeComponent implements OnInit {
         [Validators.minLength(3),
          Validators.maxLength(10),
          Validators.required,
-         Validators.pattern(Constant.TITLE_REGEX)]],
+         Validators.pattern(Constant.LETTERS_NUMBERS)]],
       productCategory: [
         null, [Validators.required]],
       description: [
         null,
         [Validators.minLength(3),
          Validators.maxLength(20),
-         Validators.required,]],
+         Validators.required,
+         Validators.pattern(Constant.LETTERS_NUMBERS)]],
       basePrice: [
         null,
         [Validators.required,

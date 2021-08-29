@@ -16,7 +16,7 @@
         nazwa może zawierać max {{name.errors?.maxlength.requiredLength}} liter
       </mat-error>
       <mat-error *ngIf="name?.hasError('pattern')">
-        Nazwa może zwierać tylko litery i liczby
+        nazwa może zwierać tylko litery i liczby
       </mat-error>
     </mat-form-field>
     <mat-form-field class="w-full">
@@ -27,6 +27,9 @@
       </mat-error>
       <mat-error *ngIf="description?.hasError('maxlength')">
         opis może zawierać max {{description.errors?.maxlength.requiredLength}} liter
+      </mat-error>
+      <mat-error *ngIf="description?.hasError('pattern')">
+        opis może zwierać tylko litery i liczby
       </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill" class="w-full">
