@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { IStudent } from '../../../model/student';
 import { Constant } from '../../../shared/constant';
 import { iInstructor } from '../../../model/instructor';
 
@@ -11,7 +10,7 @@ import { iInstructor } from '../../../model/instructor';
   styleUrls: ['./update-instructor.component.scss']
 })
 export class UpdateInstructorComponent implements OnInit {
-  instructorForm: FormGroup = new FormGroup({});
+  form: FormGroup = new FormGroup({});
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<UpdateInstructorComponent>,
@@ -20,19 +19,19 @@ export class UpdateInstructorComponent implements OnInit {
   }
 
   get firstName(): AbstractControl {
-    return this.instructorForm.get('firstName') as AbstractControl;
+    return this.form.get('firstName') as AbstractControl;
   }
 
   get lastName(): AbstractControl {
-    return this.instructorForm.get('lastName') as AbstractControl;
+    return this.form.get('lastName') as AbstractControl;
   }
 
   get email(): AbstractControl {
-    return this.instructorForm.get('email') as AbstractControl;
+    return this.form.get('email') as AbstractControl;
   }
 
   get phoneNumber(): AbstractControl {
-    return this.instructorForm.get('phoneNumber') as AbstractControl;
+    return this.form.get('phoneNumber') as AbstractControl;
   }
 
   ngOnInit(): void {
@@ -40,7 +39,7 @@ export class UpdateInstructorComponent implements OnInit {
   }
 
   onSave() {
-    const updatedAccount: IStudent = this.instructorForm.value;
+    const updatedAccount: iInstructor = this.form.value;
     this.dialogRef.close(updatedAccount);
   }
 
@@ -49,11 +48,11 @@ export class UpdateInstructorComponent implements OnInit {
   }
 
   validateForm(): boolean {
-    return this.instructorForm.invalid || this.instructorForm.pristine;
+    return this.form.invalid || this.form.pristine;
   }
 
   private initForm() {
-    this.instructorForm = this.fb.group({
+    this.form = this.fb.group({
       id: [this.instructor.id],
       firstName: [this.instructor.firstName,
         [Validators.minLength(2),

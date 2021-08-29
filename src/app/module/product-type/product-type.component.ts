@@ -78,6 +78,11 @@ export class ProductTypeComponent implements OnInit, AfterViewInit {
         this.productTypeService.update(data.id as number, data).subscribe((result: IProductType) => {
           if (result.id) {
             this.dataSource.data.filter(i => i.id === data.id).map(i => {
+              i.name = data.name;
+              i.productCategory = data.productCategory;
+              i.description = data.description;
+              i.lessonsHours = data.lessonsHours;
+              i.basePrice = data.basePrice;
             });
             this.snackBar.open("Zaktualizowano", 'OK', this.matSnackBarConfig);
           }
