@@ -5,6 +5,7 @@ import { ProductTypeComponent } from './product-type.component';
 import { AddProductTypeComponent } from './add-product-type/add-product-type.component';
 import { UpdateProductTypeComponent } from './update-product-type/update-product-type.component';
 import { MaterialModule } from '../../shared/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { MaterialModule } from '../../shared/material/material.module';
     CommonModule,
     ProductTypeRoutingModule,
     MaterialModule,
+    ReactiveFormsModule,
   ]
 })
 export class ProductTypeModule {
