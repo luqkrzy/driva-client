@@ -8,7 +8,6 @@ const routes: Routes = [
   {path: '', component: HomeComponent, data: {breadcrumb: {alias: 'Home'}}},
   {path: 'home', redirectTo: ''},
   {path: 'login', loadChildren: () => import('./module/auth/login.module').then(m => m.LoginModule)},
-  {path: 'calendar', loadChildren: () => import('./module/calendar/calendar.module').then(m => m.CalendarModule)},
   {path: 'products', loadChildren: () => import('./module/products/products.module').then(m => m.ProductsModule)},
   {path: 'students', loadChildren: () => import('./module/students/student-list.module').then(m => m.StudentListModule)},
   {path: 'account', loadChildren: () => import('./module/account/account.module').then(m => m.AccountModule)},
@@ -20,6 +19,7 @@ const routes: Routes = [
     path: 'students/:id', loadChildren: () => import('./module/student-details/student-details.module').then(m => m.StudentDetailsModule),
     resolve: {student: StudentResolver}
   },
+  {path: 'instructors/:id/calendar', loadChildren: () => import('./module/calendar/calendar.module').then(m => m.CalendarModule)},
   {path: '**', component: PageNotFoundComponent, pathMatch: 'full'},
 ];
 
