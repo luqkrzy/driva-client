@@ -28,7 +28,7 @@ export class AddProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productTypeService.getAllProductTypes().subscribe(data => {
+    this.productTypeService.getAll().subscribe(data => {
       this.productTypes = data;
     });
     this.initProductForm();

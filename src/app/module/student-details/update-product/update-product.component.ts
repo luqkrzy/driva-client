@@ -47,7 +47,7 @@ export class UpdateProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.product = this.data;
-    this.productTypeService.getAllProductTypes().subscribe(data => {
+    this.productTypeService.getAll().subscribe(data => {
       this.productTypes = data;
     });
     this.initProductForm();

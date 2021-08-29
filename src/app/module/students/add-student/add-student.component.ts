@@ -78,7 +78,7 @@ export class AddStudentComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.initStudentForm();
     this.initProductForm();
-    this.productTypeService.getAllProductTypes().subscribe(data => {
+    this.productTypeService.getAll().subscribe(data => {
         this.productTypes = data;
       }
     );

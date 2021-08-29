@@ -7,7 +7,6 @@ import { lvl2 } from '../auth/roles';
 
 const routes: Routes = [
   {path: '', component: StudentsListComponent, canActivate: [AuthGuard, RoleGuard], data: {role: lvl2}},
-  // {path: ':id', component: StudentDetailsComponent, canActivate: [AuthGuard, RoleGuard], data: {role: lvl2}}
 ];
 
 @NgModule({
