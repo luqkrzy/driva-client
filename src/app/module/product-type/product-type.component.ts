@@ -7,9 +7,9 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { IProductType } from '../../model/product-type';
 import { Router } from '@angular/router';
 import { ProductTypeService } from './product-type.service';
-import { AddInstructorComponent } from '../instructors/add-instructor/add-instructor.component';
-import { UpdateInstructorComponent } from '../instructors/update-instructor/update-instructor.component';
 import { DeleteDialogComponent } from '../student-details/delete-dialog/delete-dialog.component';
+import { AddProductTypeComponent } from './add-product-type/add-product-type.component';
+import { UpdateProductTypeComponent } from './update-product-type/update-product-type.component';
 
 @Component({
   selector: 'app-product-type',
@@ -62,7 +62,7 @@ export class ProductTypeComponent implements OnInit, AfterViewInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AddInstructorComponent, this.dialogConfig);
+    const dialogRef = this.dialog.open(AddProductTypeComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe((productType: IProductType) => {
       if (productType) {
         this.save(productType);
@@ -72,7 +72,7 @@ export class ProductTypeComponent implements OnInit, AfterViewInit {
 
   update(productType: IProductType) {
     this.dialogConfig.data = productType;
-    const dialogRef = this.dialog.open(UpdateInstructorComponent, this.dialogConfig);
+    const dialogRef = this.dialog.open(UpdateProductTypeComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe((data: IProductType) => {
       if (data) {
         this.productTypeService.update(data.id as number, data).subscribe((result: IProductType) => {
