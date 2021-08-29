@@ -13,7 +13,7 @@ import { delay, map, switchMap } from 'rxjs/operators';
   styleUrls: ['./add-instructor.component.scss']
 })
 export class AddInstructorComponent implements OnInit {
-  instructorForm: FormGroup = new FormGroup({});
+  form: FormGroup = new FormGroup({});
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddInstructorComponent>,
@@ -21,19 +21,19 @@ export class AddInstructorComponent implements OnInit {
   }
 
   get firstName(): AbstractControl {
-    return this.instructorForm.get('firstName') as AbstractControl;
+    return this.form.get('firstName') as AbstractControl;
   }
 
   get lastName(): AbstractControl {
-    return this.instructorForm.get('lastName') as AbstractControl;
+    return this.form.get('lastName') as AbstractControl;
   }
 
   get email(): AbstractControl {
-    return this.instructorForm.get('email') as AbstractControl;
+    return this.form.get('email') as AbstractControl;
   }
 
   get phoneNumber(): AbstractControl {
-    return this.instructorForm.get('phoneNumber') as AbstractControl;
+    return this.form.get('phoneNumber') as AbstractControl;
   }
 
   onClose(): void {
@@ -41,13 +41,13 @@ export class AddInstructorComponent implements OnInit {
   }
 
   onSave(): void {
-    const instructor: iInstructor = this.instructorForm.value;
+    const instructor: iInstructor = this.form.value;
     this.dialogRef.close(instructor);
   }
 
   validateForm(): boolean {
-    return this.instructorForm.invalid || (
-      this.instructorForm.value && this.instructorForm.pristine
+    return this.form.invalid || (
+      this.form.value && this.form.pristine
     );
   }
 
@@ -56,7 +56,7 @@ export class AddInstructorComponent implements OnInit {
   }
 
   private initForm() {
-    this.instructorForm = this.fb.group({
+    this.form = this.fb.group({
       firstName: [
         'Adam',
         [Validators.minLength(3),

@@ -18,8 +18,8 @@ import { UpdateProductTypeComponent } from './update-product-type/update-product
 })
 export class ProductTypeComponent implements OnInit, AfterViewInit {
   isLoadingResults = true;
-  readonly columns: string[] = ['id', 'name', 'description', 'productCategory', 'basePrice', 'lessonsHours', 'edit'];
-  readonly displayedColumns = ['id', 'Nazwa', 'opis', 'Kat.', 'c. baz.', 'l. godzin', ''];
+  readonly columns: string[] = ['id', 'productCategory', 'name', 'description', 'basePrice', 'lessonsHours', 'edit'];
+  readonly displayedColumns = ['id', 'Kat.', 'Nazwa', 'opis', 'c. baz.', 'l. godzin', ''];
   dataSource = new MatTableDataSource<IProductType>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -96,6 +96,8 @@ export class ProductTypeComponent implements OnInit, AfterViewInit {
             this.dataSource.data = this.dataSource.data.filter(p => p.id !== id);
             this.snackBar.open('Usunięto', 'OK', this.matSnackBarConfig);
           }
+        }, () => {
+          this.snackBar.open('Rekordu nie można usunąć, gdyż powiązane są z nim inne zasoby', 'OK', this.matSnackBarConfig);
         });
       }
     });
