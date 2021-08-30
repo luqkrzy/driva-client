@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { StudentResolver } from './resolver/student.resolver';
+import { InstructorResolver } from './resolver/instructor.resolver';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: {breadcrumb: {alias: 'Home'}}},
@@ -19,7 +20,10 @@ const routes: Routes = [
     path: 'students/:id', loadChildren: () => import('./module/student-details/student-details.module').then(m => m.StudentDetailsModule),
     resolve: {student: StudentResolver}
   },
-  {path: 'instructors/:id/calendar', loadChildren: () => import('./module/calendar/calendar.module').then(m => m.CalendarModule)},
+  {
+    path: 'instructors/:id/calendar', loadChildren: () => import('./module/calendar/calendar.module').then(m => m.CalendarModule),
+    resolve: {instructor: InstructorResolver}
+  },
   {path: '**', component: PageNotFoundComponent, pathMatch: 'full'},
 ];
 

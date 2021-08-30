@@ -60,7 +60,7 @@ export class InstructorsComponent implements OnInit, AfterViewInit {
   }
 
   onClick(row: iInstructor): void {
-    console.log(row);
+    this.router.navigateByUrl(`instructors/${row.id}/calendar`);
   }
 
   openAddInstructorDialog(): void {
