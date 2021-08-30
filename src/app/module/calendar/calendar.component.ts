@@ -25,6 +25,7 @@ export class CalendarComponent implements OnInit {
       day: 'dzień',
       list: 'lista'
     },
+    locale: 'pl',
     slotMinTime: '06:00:00',
     slotMaxTime: '21:00:00',
     height: 800,
